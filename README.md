@@ -23,15 +23,17 @@
 
 ## 🚀 如何使用
 
-本项目设计的初衷是直接在**支持 JavaScript 预处理**的 Clash 客户端中使用。以 **Clash Verge Rev** 为例：
+本项目支持所有**具备 JavaScript 预处理**的 Clash 客户端中使用。以 **Clash Verge Rev** 为例：
 
 1. 打开 Clash Verge Rev 的 **订阅 (Subscriptions)** 页面。
-2. 右键点击你的基础节点订阅（或者新建一个订阅），选择 **编辑 (Edit)**。
-3. 找到 **Script**（或处理脚本）选项。
+2. 右键点击你的基础节点订阅，选择 **编辑 (Edit)**。
+3. 找到 **扩展脚本 (Extend Script)** 选项。
 4. 将本项目中的 `clash-script.js` 文件内容完整复制并粘贴进去，或者指定本地该 JS 文件的路径。
 5. 保存并更新订阅。客户端在拉取节点后，会自动执行此脚本进行规则注入和节点重组。
 
-*注意：由于脚本内完全接管了 `proxy-groups`, `rule-providers` 和 `rules`，你的初始订阅仅需要包含有效的 `proxies` 节点列表即可。*
+> [!NOTE]
+>
+> 由于脚本内完全接管了 `proxy-groups`, `rule-providers` 和 `rules`，你的初始订阅仅需要包含有效的 `proxies` 节点列表即可。
 
 ## ⚙️ 个性化定制
 
@@ -42,8 +44,8 @@
 ```javascript
 const countryMapping = [
   // ...
-  { regex: /^(KR|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
-  { regex: /^(TH|Thailand|泰国|曼谷)/i, flag: "🇹🇭", name: "TH" }, // 添加新的国家
+  { regex: /(🇰🇷|KR|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
+  { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" }, // 添加新的国家
 ];
 ```
 *注：脚本具有容错性，如果订阅中没有匹配到某个国家，则不会生成对应的空白节点组。*
@@ -51,7 +53,7 @@ const countryMapping = [
 ### 2. 更改排序优先级
 修改 `sortOrder` 数组来决定策略组和节点在列表中的展示顺序：
 ```javascript
-const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US", "TH"];
+const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US"];
 ```
 
 ### 3. 调整应用分流组行为
