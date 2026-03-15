@@ -39,7 +39,24 @@
 
 如果你想将这个脚本用于更广泛的场景，可以直接修改 `clash-script.js` 开头的几个变量：
 
-### 1. 添加更多国家/地区
+###  1. 选择是否保留特殊节点
+
+选择是否在`主代理`中保留 "剩余流量"、"套餐到期" 等提示信息类节点
+
+```javascript
+// true 则保留在主代理中，false 则完全不显示这些节点  
+const SHOW_INFO_NODES_IN_MAIN = true; 
+```
+
+ 选择是否在主代理中保留 `DIRECT` (直连) 选项
+
+```javascript
+// true 则保留，false 则去除
+const SHOW_DIRECT_IN_MAIN = true;
+```
+
+### 2. 添加更多国家/地区
+
 在 `countryMapping` 数组中添加新的正则表达式和对应的旗帜：
 ```javascript
 const countryMapping = [
@@ -50,13 +67,13 @@ const countryMapping = [
 ```
 *注：脚本具有容错性，如果订阅中没有匹配到某个国家，则不会生成对应的空白节点组。*
 
-### 2. 更改排序优先级
+### 3. 更改排序优先级
 修改 `sortOrder` 数组来决定策略组和节点在列表中的展示顺序：
 ```javascript
 const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US"];
 ```
 
-### 3. 调整应用分流组行为
+### 4. 调整应用分流组行为
 如果你想改变某个特定应用（例如“中国大陆网站”）的策略，可以在 `appGroupNames.forEach` 循环中修改逻辑：
 ```javascript
 let appProxies = [...proxiesForApp];
