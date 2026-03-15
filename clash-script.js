@@ -1,26 +1,57 @@
 function main(config) {
+  // ================= 基础配置开关 =================
+  // 是否在主代理中保留 "剩余流量"、"套餐到期" 等提示信息类节点
+  // true 则保留在主代理中，false 则完全不显示这些节点
+  const SHOW_INFO_NODES_IN_MAIN = true;
+  
+  // 是否在主代理中保留 "DIRECT" (直连) 选项
+  // true 则保留，false 则去除
+  const SHOW_DIRECT_IN_MAIN = true;
+
   // 预定义的国家正则匹配和对应的旗帜
+  // 你可以在这里继续添加你需要分类的国家或地区，如果没有匹配到相应的节点，则不会生成该分组
+  // 提示：去除了 ^ 开头限制，以便更好地匹配已经带有旗帜或其他前缀的节点名称
   const countryMapping = [
-    { regex: /^(HK|HongKong|香港)/i, flag: "🇭🇰", name: "HK" },
-    { regex: /^(JP|Japan|日本|东京|大阪)/i, flag: "🇯🇵", name: "JP" },
-    { regex: /^(KR|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
-    { regex: /^(SG|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" },
-    { regex: /^(TW|Taiwan|台湾|新北|彰化)/i, flag: "🇹🇼", name: "TW" },
-    { regex: /^(US|America|美国|洛杉矶|硅谷|西雅图)/i, flag: "🇺🇸", name: "US" },
-    { regex: /^(UK|UK|英国|伦敦)/i, flag: "🇬🇧", name: "UK" },
-    { regex: /^(DE|Germany|德国|法兰克福)/i, flag: "🇩🇪", name: "DE" },
-    { regex: /^(FR|France|法国|巴黎)/i, flag: "🇫🇷", name: "FR" },
-    { regex: /^(AU|Australia|澳大利亚|悉尼)/i, flag: "🇦🇺", name: "AU" },
-    { regex: /^(RU|Russia|俄罗斯|莫斯科)/i, flag: "🇷🇺", name: "RU" },
-    { regex: /^(IN|India|印度|孟买)/i, flag: "🇮🇳", name: "IN" },
-    { regex: /^(CA|Canada|加拿大)/i, flag: "🇨🇦", name: "CA" },
-    { regex: /^(MY|Malaysia|马来西亚)/i, flag: "🇲🇾", name: "MY" }
+    { regex: /(🇭🇰|HK|HongKong|香港)/i, flag: "🇭🇰", name: "HK" },
+    { regex: /(🇯🇵|JP|Japan|日本|东京|大阪)/i, flag: "🇯🇵", name: "JP" },
+    { regex: /(🇰🇷|KR|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
+    { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" },
+    { regex: /(🇹🇼|TW|Taiwan|台湾|新北|彰化|台北)/i, flag: "🇹🇼", name: "TW" },
+    { regex: /(🇺🇸|US|America|美国|洛杉矶|硅谷|西雅图|凤凰城|圣何塞)/i, flag: "🇺🇸", name: "US" },
+    { regex: /(🇬🇧|UK|英国|伦敦)/i, flag: "🇬🇧", name: "UK" },
+    { regex: /(🇩🇪|DE|Germany|德国|法兰克福)/i, flag: "🇩🇪", name: "DE" },
+    { regex: /(🇫🇷|FR|France|法国|巴黎)/i, flag: "🇫🇷", name: "FR" },
+    { regex: /(🇨🇦|CA|Canada|加拿大)/i, flag: "🇨🇦", name: "CA" },
+    { regex: /(🇦🇺|AU|Australia|澳大利亚|悉尼)/i, flag: "🇦🇺", name: "AU" }
+    // { regex: /(🇲🇾|MY|Malaysia|马来西亚)/i, flag: "🇲🇾", name: "MY" },
+    // { regex: /(🇷🇺|RU|Russia|俄罗斯|莫斯科)/i, flag: "🇷🇺", name: "RU" },
+    // { regex: /(🇦🇪|AE|Dubai|迪拜)/i, flag: "🇦🇪", name: "AE" },
+    // { regex: /(🇧🇷|BR|Brazil|巴西|圣保罗)/i, flag: "🇧🇷", name: "BR" },
+    // { regex: /(🇮🇳|IN|India|印度|孟买|海得拉巴)/i, flag: "🇮🇳", name: "IN" },
+    // { regex: /(🇲🇽|MX|Mexico|墨西哥|克雷塔罗)/i, flag: "🇲🇽", name: "MX" },
+    // { regex: /(🇪🇸|ES|Spain|西班牙|马德里)/i, flag: "🇪🇸", name: "ES" }
   ];
 
   // 定义排序优先级
   const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US"];
-  
+
+  // =================================================
+
+
   const proxies = config.proxies || [];
+  
+  // 用于提取信息类节点（如剩余流量、套餐到期）
+  const infoNodes = [];
+  const normalProxies = [];
+
+  proxies.forEach(proxy => {
+    // 匹配常见的流量/过期时间等提示性节点
+    if (/剩余流量|套餐到期|到期时间|过期时间|有效时间|Traffic|Expire/i.test(proxy.name)) {
+      infoNodes.push(proxy.name);
+    } else {
+      normalProxies.push(proxy);
+    }
+  });
   
   // 用于存储检测到的国家节点
   const countryNodes = {};
@@ -28,24 +59,23 @@ function main(config) {
   // 记录每个节点所属的国家，用于后续零散节点排序
   const nodeCountryMap = {};
 
-  // 1. 为节点添加旗帜，并收集国家分类
-  proxies.forEach(proxy => {
+  // 1. 为正常节点添加旗帜，并收集国家分类
+  normalProxies.forEach(proxy => {
     let matched = false;
     for (const mapping of countryMapping) {
       if (mapping.regex.test(proxy.name)) {
-        // 去除原本可能有的重复前缀旗帜，只保留新的旗帜
         if (!proxy.name.startsWith(mapping.flag)) {
             proxy.name = `${mapping.flag} ${proxy.name}`;
         }
         
-        const groupName = mapping.name; // 不带旗帜的组名
+        const groupName = mapping.name;
         if (!countryNodes[groupName]) {
           countryNodes[groupName] = [];
         }
         countryNodes[groupName].push(proxy.name);
         nodeCountryMap[proxy.name] = mapping.name;
         matched = true;
-        break; // 匹配到一个国家就跳出
+        break;
       }
     }
     if (!matched) {
@@ -60,13 +90,13 @@ function main(config) {
     const indexB = sortOrder.indexOf(b);
     
     if (indexA !== -1 && indexB !== -1) {
-      return indexA - indexB; // 都在优先级列表中，按列表顺序
+      return indexA - indexB;
     } else if (indexA !== -1) {
-      return -1; // a 在列表中，a 排前面
+      return -1;
     } else if (indexB !== -1) {
-      return 1; // b 在列表中，b 排前面
+      return 1;
     } else {
-      return a.localeCompare(b); // 都不在列表中，按字母顺序
+      return a.localeCompare(b);
     }
   });
 
@@ -83,16 +113,16 @@ function main(config) {
     });
   });
 
-  // 对所有节点名称进行排序
-  const allProxyNames = proxies.map(p => p.name).sort((nameA, nameB) => {
+  // 对所有正常节点名称进行排序
+  const allProxyNames = normalProxies.map(p => p.name).sort((nameA, nameB) => {
     const countryA = nodeCountryMap[nameA];
     const countryB = nodeCountryMap[nameB];
     
     if (countryA === countryB) {
-      return nameA.localeCompare(nameB); // 同一个国家内按名称排序
+      return nameA.localeCompare(nameB);
     }
     
-    if (countryA === "others") return 1;  // others 永远排在最后
+    if (countryA === "others") return 1;
     if (countryB === "others") return -1;
     
     const indexA = sortOrder.indexOf(countryA);
@@ -111,28 +141,34 @@ function main(config) {
 
   // 2. 构建新的代理组
   const newProxyGroups = [];
+  
+  // 根据用户配置开关，决定在主代理中是否显示 信息节点 和 DIRECT
+  const mainProxyInject = [];
+  if (SHOW_INFO_NODES_IN_MAIN) {
+    mainProxyInject.push(...infoNodes);
+  }
+  if (SHOW_DIRECT_IN_MAIN) {
+    mainProxyInject.push("DIRECT");
+  }
 
-  // 主代理组 (去除图标)
+  // 主代理组
   const mainProxyGroup = {
     name: "主代理",
     type: "select",
-    proxies: [...countryGroupNames, "DIRECT", ...allProxyNames]
+    proxies: [...countryGroupNames, ...mainProxyInject, ...allProxyNames]
   };
   newProxyGroups.push(mainProxyGroup);
 
-  // 应用分类策略组 (无图标)
+  // 应用分类策略组
   const appGroupNames = [
     "中国大陆网站", "黑名单网站", "Google", "Apple", "Microsoft", "Bahamut", 
     "Bilibili", "Discord", "GoogleFCM", "Netflix", "OpenAI", "Speedtest", 
     "Spotify", "Steam", "Telegram", "TikTok"
   ];
 
-  // 这里的策略组只有 主代理、DIRECT 和国家节点组
   appGroupNames.forEach(appName => {
-    const proxiesForApp = ["主代理", "DIRECT", ...countryGroupNames];
+    let appProxies = ["主代理", "DIRECT", ...countryGroupNames];
     
-    // 特定组的细微调整
-    let appProxies = [...proxiesForApp];
     if (appName === "中国大陆网站" || appName === "Bilibili") {
         appProxies = ["DIRECT", "主代理", ...countryGroupNames];
     }
@@ -144,7 +180,7 @@ function main(config) {
     });
   });
   
-  // 将生成的国家组也放入总代理组中
+  // 将生成的国家组放入总代理组中
   newProxyGroups.push(...countryProxyGroups);
 
   // 3. 构建新的 Rule-Providers
@@ -242,7 +278,6 @@ function main(config) {
   }
 
   // 6. 将构建好的对象重新赋给 config
-  config.proxies = proxies;
   config["proxy-groups"] = newProxyGroups;
   config["rule-providers"] = ruleProviders;
   config.rules = rules;
