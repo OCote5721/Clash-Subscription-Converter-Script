@@ -247,35 +247,132 @@ function main(config) {
     "MATCH,主代理"
   ];
   
-  // 5. 更新 DNS 设置
-  if (config.dns) {
-    if (config.dns.nameserver) {
-       config.dns.nameserver = config.dns.nameserver.map(ns => ns.replace("#🌏️主代理", "#主代理"));
+  // 5. 注入全局配置并重置策略组与规则
+  config["port"] = 7890;
+  config["socks-port"] = 7891;
+  config["mixed-port"] = 7892;
+  config["allow-lan"] = false;
+  config["bind-address"] = "*";
+  config["mode"] = "rule";
+  config["log-level"] = "info";
+  config["ipv6"] = false;
+  config["find-process-mode"] = "strict";
+  config["external-controller"] = "127.0.0.1:9090";
+  config["profile"] = {
+    "store-selected": true,
+    "store-fake-ip": true
+  };
+  config["unified-delay"] = true;
+  config["tcp-concurrent"] = true;
+  config["global-ua"] = "clash.meta";
+
+  config["sniffer"] = {
+    "enable": true,
+    "force-dns-mapping": true,
+    "parse-pure-ip": true,
+    "override-destination": true,
+    "sniff": {
+      "HTTP": {
+        "ports": [80, "8080-8880"],
+        "override-destination": true
+      },
+      "TLS": {
+        "ports": [443, 8443]
+      },
+      "QUIC": {
+        "ports": [443, 8443]
+      }
+    },
+    "skip-domain": [
+      "Mijia Cloud"
+    ]
+  };
+
+  config["ntp"] = {
+    "enable": true,
+    "write-to-system": false,
+    "server": "ntp.aliyun.com",
+    "port": 123,
+    "interval": 30
+  };
+
+  config["tun"] = {
+    "enable": true,
+    "stack": "system",
+    "auto-route": true,
+    "auto-detect-interface": true,
+    "strict-route": true,
+    "dns-hijack": [
+      "any:53"
+    ],
+    "device": "SakuraiTunnel",
+    "mtu": 9000,
+    "endpoint-independent-nat": true
+  };
+
+  config["dns"] = {
+    "enable": true,
+    "prefer-h3": false,
+    "listen": "0.0.0.0:1053",
+    "ipv6": false,
+    "enhanced-mode": "fake-ip",
+    "fake-ip-range": "198.18.0.1/16",
+    "fake-ip-filter": [
+      "+.lan",
+      "+.local",
+      "localhost.ptlogin2.qq.com",
+      "+.msftconnecttest.com",
+      "+.msftncsi.com",
+      "+.googleapis.com",
+      "+.googleapis.cn",
+      "alt1-mtalk.google.com",
+      "alt2-mtalk.google.com",
+      "alt3-mtalk.google.com",
+      "alt4-mtalk.google.com",
+      "alt5-mtalk.google.com",
+      "alt6-mtalk.google.com",
+      "alt7-mtalk.google.com",
+      "alt8-mtalk.google.com",
+      "mtalk.google.com"
+    ],
+    "use-hosts": true,
+    "default-nameserver": [
+      "114.114.114.114#DIRECT",
+      "223.5.5.5#DIRECT",
+      "119.29.29.29#DIRECT",
+      "180.76.76.76#DIRECT",
+      "180.184.1.1#DIRECT"
+    ],
+    "proxy-server-nameserver": [
+      "https://dns.alidns.com/dns-query#DIRECT",
+      "https://doh.pub/dns-query#DIRECT",
+      "https://doh.onedns.net/dns-query#DIRECT"
+    ],
+    "nameserver": [
+      "https://cloudflare-dns.com/dns-query#主代理"
+    ],
+    "nameserver-policy": {
+      "ntp.aliyun.com": "https://dns.alidns.com/dns-query#DIRECT",
+      "+.msftconnecttest.com,+.msftncsi.com": "https://cloudflare-dns.com/dns-query#主代理",
+      "+.googleapis.com,+.googleapis.cn": "https://cloudflare-dns.com/dns-query#Google",
+      "rule-set:Bahamut-Site": "https://cloudflare-dns.com/dns-query#Bahamut",
+      "rule-set:Bilibili-Site": "https://dns.alidns.com/dns-query#Bilibili",
+      "rule-set:Discord-Site": "https://cloudflare-dns.com/dns-query#Discord",
+      "rule-set:GoogleFCM-Site": "https://cloudflare-dns.com/dns-query#GoogleFCM",
+      "rule-set:Netflix-Site": "https://cloudflare-dns.com/dns-query#Netflix",
+      "rule-set:OpenAI-Site": "https://cloudflare-dns.com/dns-query#OpenAI",
+      "rule-set:Speedtest-Site": "https://cloudflare-dns.com/dns-query#Speedtest",
+      "rule-set:Spotify-Site": "https://cloudflare-dns.com/dns-query#Spotify",
+      "rule-set:Steam-Site": "https://doh.pub/dns-query#Steam",
+      "rule-set:Telegram-Site": "https://cloudflare-dns.com/dns-query#Telegram",
+      "rule-set:TikTok-Site": "https://cloudflare-dns.com/dns-query#TikTok",
+      "rule-set:Apple-Site": "https://doh.pub/dns-query#Apple",
+      "rule-set:Google-Site": "https://cloudflare-dns.com/dns-query#Google",
+      "rule-set:Microsoft-Site": "https://doh.pub/dns-query#Microsoft",
+      "rule-set:GFWList-Site": "https://cloudflare-dns.com/dns-query#黑名单网站",
+      "rule-set:China-Site": "https://dns.alidns.com/dns-query#中国大陆网站"
     }
-    if (config.dns["nameserver-policy"]) {
-       config.dns["nameserver-policy"] = {
-        "ntp.aliyun.com": "https://dns.alidns.com/dns-query#DIRECT",
-        "+.msftconnecttest.com,+.msftncsi.com": "https://cloudflare-dns.com/dns-query#主代理",
-        "+.googleapis.com,+.googleapis.cn": "https://cloudflare-dns.com/dns-query#Google",
-        "rule-set:Bahamut-Site": "https://cloudflare-dns.com/dns-query#Bahamut",
-        "rule-set:Bilibili-Site": "https://dns.alidns.com/dns-query#Bilibili",
-        "rule-set:Discord-Site": "https://cloudflare-dns.com/dns-query#Discord",
-        "rule-set:GoogleFCM-Site": "https://cloudflare-dns.com/dns-query#GoogleFCM",
-        "rule-set:Netflix-Site": "https://cloudflare-dns.com/dns-query#Netflix",
-        "rule-set:OpenAI-Site": "https://cloudflare-dns.com/dns-query#OpenAI",
-        "rule-set:Speedtest-Site": "https://cloudflare-dns.com/dns-query#Speedtest",
-        "rule-set:Spotify-Site": "https://cloudflare-dns.com/dns-query#Spotify",
-        "rule-set:Steam-Site": "https://doh.pub/dns-query#Steam",
-        "rule-set:Telegram-Site": "https://cloudflare-dns.com/dns-query#Telegram",
-        "rule-set:TikTok-Site": "https://cloudflare-dns.com/dns-query#TikTok",
-        "rule-set:Apple-Site": "https://doh.pub/dns-query#Apple",
-        "rule-set:Google-Site": "https://cloudflare-dns.com/dns-query#Google",
-        "rule-set:Microsoft-Site": "https://doh.pub/dns-query#Microsoft",
-        "rule-set:GFWList-Site": "https://cloudflare-dns.com/dns-query#黑名单网站",
-        "rule-set:China-Site": "https://dns.alidns.com/dns-query#中国大陆网站"
-       };
-    }
-  }
+  };
 
   // 6. 将构建好的对象重新赋给 config
   config["proxy-groups"] = newProxyGroups;

@@ -105,7 +105,7 @@ tun:
   dns-hijack:
     - any:53
   device: SakuraiTunnel
-  mtu: 9000
+  mtu: 1500
   endpoint-independent-nat: true
 
 proxies:
