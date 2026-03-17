@@ -185,31 +185,231 @@ function main(config) {
 
   // 3. 构建新的 Rule-Providers
   const ruleProviders = {
-    "Apple-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Apple/Apple-Site.mrs", path: "./ruleset/Apple-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Apple-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Apple/Apple-IP.mrs", path: "./ruleset/Apple-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "Bahamut-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Bahamut/Bahamut-Site.mrs", path: "./ruleset/Bahamut-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Bilibili-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Bilibili/Bilibili-Site.mrs", path: "./ruleset/Bilibili-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Bilibili-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Bilibili/Bilibili-IP.mrs", path: "./ruleset/Bilibili-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "China-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/China/China-Site.mrs", path: "./ruleset/China-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "China-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/China/China-IP.mrs", path: "./ruleset/China-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "Discord-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Discord/Discord-Site.mrs", path: "./ruleset/Discord-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "GFWList-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/GFWList/GFWList-Site.mrs", path: "./ruleset/GFWList-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Google-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Google/Google-Site.mrs", path: "./ruleset/Google-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Google-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Google/Google-IP.mrs", path: "./ruleset/Google-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "GoogleFCM-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/GoogleFCM/GoogleFCM-Site.mrs", path: "./ruleset/GoogleFCM-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Local-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Local/Local-IP.mrs", path: "./ruleset/Local-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "Microsoft-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Microsoft/Microsoft-Site.mrs", path: "./ruleset/Microsoft-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Netflix-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Netflix/Netflix-Site.mrs", path: "./ruleset/Netflix-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Netflix-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Netflix/Netflix-IP.mrs", path: "./ruleset/Netflix-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "OpenAI-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/OpenAI/OpenAI-Site.mrs", path: "./ruleset/OpenAI-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "OpenAI-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/OpenAI/OpenAI-IP.mrs", path: "./ruleset/OpenAI-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "Speedtest-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Speedtest/Speedtest-Site.mrs", path: "./ruleset/Speedtest-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Spotify-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Spotify/Spotify-Site.mrs", path: "./ruleset/Spotify-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Spotify-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Spotify/Spotify-IP.mrs", path: "./ruleset/Spotify-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "Steam-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Steam/Steam-Site.mrs", path: "./ruleset/Steam-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Telegram-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/Telegram/Telegram-Site.mrs", path: "./ruleset/Telegram-Site.mrs", proxy: "DIRECT", interval: 86400 },
-    "Telegram-IP": { type: "http", behavior: "ipcidr", format: "mrs", url: "mihomo/Telegram/Telegram-IP.mrs", path: "./ruleset/Telegram-IP.mrs", proxy: "DIRECT", interval: 86400 },
-    "TikTok-Site": { type: "http", behavior: "domain", format: "mrs", url: "mihomo/TikTok/TikTok-Site.mrs", path: "./ruleset/TikTok-Site.mrs", proxy: "DIRECT", interval: 86400 }
+    "Apple-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Apple/Apple-Site.mrs",
+      path: "./ruleset/Apple-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Apple-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Apple/Apple-IP.mrs",
+      path: "./ruleset/Apple-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Bahamut-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Bahamut/Bahamut-Site.mrs",
+      path: "./ruleset/Bahamut-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Bilibili-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Bilibili/Bilibili-Site.mrs",
+      path: "./ruleset/Bilibili-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Bilibili-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Bilibili/Bilibili-IP.mrs",
+      path: "./ruleset/Bilibili-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "China-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/China/China-Site.mrs",
+      path: "./ruleset/China-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "China-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/China/China-IP.mrs",
+      path: "./ruleset/China-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Discord-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Discord/Discord-Site.mrs",
+      path: "./ruleset/Discord-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "GFWList-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/GFWList/GFWList-Site.mrs",
+      path: "./ruleset/GFWList-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Google-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Google/Google-Site.mrs",
+      path: "./ruleset/Google-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Google-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Google/Google-IP.mrs",
+      path: "./ruleset/Google-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "GoogleFCM-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/GoogleFCM/GoogleFCM-Site.mrs",
+      path: "./ruleset/GoogleFCM-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Local-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Local/Local-IP.mrs",
+      path: "./ruleset/Local-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Microsoft-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Microsoft/Microsoft-Site.mrs",
+      path: "./ruleset/Microsoft-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Netflix-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Netflix/Netflix-Site.mrs",
+      path: "./ruleset/Netflix-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Netflix-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Netflix/Netflix-IP.mrs",
+      path: "./ruleset/Netflix-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "OpenAI-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/OpenAI/OpenAI-Site.mrs",
+      path: "./ruleset/OpenAI-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "OpenAI-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/OpenAI/OpenAI-IP.mrs",
+      path: "./ruleset/OpenAI-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Speedtest-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Speedtest/Speedtest-Site.mrs",
+      path: "./ruleset/Speedtest-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Spotify-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Spotify/Spotify-Site.mrs",
+      path: "./ruleset/Spotify-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Spotify-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Spotify/Spotify-IP.mrs",
+      path: "./ruleset/Spotify-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Steam-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Steam/Steam-Site.mrs",
+      path: "./ruleset/Steam-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Telegram-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Telegram/Telegram-Site.mrs",
+      path: "./ruleset/Telegram-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "Telegram-IP": {
+      type: "http",
+      behavior: "ipcidr",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Telegram/Telegram-IP.mrs",
+      path: "./ruleset/Telegram-IP.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    },
+    "TikTok-Site": {
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/TikTok/TikTok-Site.mrs",
+      path: "./ruleset/TikTok-Site.mrs",
+      proxy: "DIRECT",
+      interval: 86400
+    }
   };
 
   // 4. 构建新的 Rules
