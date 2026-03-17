@@ -35,6 +35,16 @@
 >
 > 由于脚本内完全接管了 `proxy-groups`, `rule-providers` 和 `rules`，你的初始订阅仅需要包含有效的 `proxies` 节点列表即可。
 
+> [!TIP]
+>
+> 在支持 URL 导入 JavaScript 脚本的客户端中（例如 FlClash），可以从下面两个链接导入最新版本的脚本
+>
+> https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/clash-script.js
+>
+> https://cdn.jsdmirror.com/gh/OCote5721/Clash-Subscription-Converter-Script@main/clash-script.js
+
+
+
 ## ⚙️ 个性化定制
 
 如果你想将这个脚本用于更广泛的场景，可以直接修改 `clash-script.js` 开头的几个变量：
