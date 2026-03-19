@@ -20,13 +20,14 @@
 1. 从仓库或者 Release 里找到 `clash-script.js` 文件，或者使用下面的链接导入
 
    ``` url
-   https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/clash-script.js
-   
    https://cdn.jsdmirror.com/gh/OCote5721/Clash-Subscription-Converter-Script@main/clash-script.js  
    ```
-
+   ``` url
+   https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/clash-script.js
+   ```
    
-
+   
+   
 2. 复制脚本内完整的代码，并粘贴到客户端的 JavaScript 扩展脚本内。
 
    
@@ -130,7 +131,8 @@ Clash Meta For Android 不支持 JavaScript 脚本扩展，因此准备了 YAML 
 
 ``` url
 https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/proxy-providers.yaml
-
+```
+``` url
 https://cdn.jsdmirror.com/gh/OCote5721/Clash-Subscription-Converter-Script@main/proxy-providers.yaml  
 ```
 
