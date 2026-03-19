@@ -12,27 +12,28 @@ function main(config) {
   // 你可以在这里继续添加你需要分类的国家或地区，如果没有匹配到相应的节点，则不会生成该分组
   // 提示：去除了 ^ 开头限制，以便更好地匹配已经带有旗帜或其他前缀的节点名称
   const countryMapping = [
-    { regex: /(🇭🇰|HK|HongKong|香港)/i, flag: "🇭🇰", name: "HK" },
-    { regex: /(🇯🇵|JP|Japan|日本|东京|大阪)/i, flag: "🇯🇵", name: "JP" },
-    { regex: /(🇰🇷|KR|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
-    { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" },
-    { regex: /(🇹🇼|TW|Taiwan|台湾|新北|彰化|台北)/i, flag: "🇹🇼", name: "TW" },
-    { regex: /(🇺🇸|US|America|美国|洛杉矶|硅谷|西雅图|凤凰城|圣何塞)/i, flag: "🇺🇸", name: "US" },
-    { regex: /(🇬🇧|UK|英国|伦敦)/i, flag: "🇬🇧", name: "UK" },
-    { regex: /(🇩🇪|DE|Germany|德国|法兰克福)/i, flag: "🇩🇪", name: "DE" },
-    { regex: /(🇫🇷|FR|France|法国|巴黎)/i, flag: "🇫🇷", name: "FR" },
-    { regex: /(🇨🇦|CA|Canada|加拿大)/i, flag: "🇨🇦", name: "CA" },
-    { regex: /(🇦🇺|AU|Australia|澳大利亚|悉尼)/i, flag: "🇦🇺", name: "AU" }
-    // { regex: /(🇲🇾|MY|Malaysia|马来西亚)/i, flag: "🇲🇾", name: "MY" },
-    // { regex: /(🇷🇺|RU|Russia|俄罗斯|莫斯科)/i, flag: "🇷🇺", name: "RU" },
-    // { regex: /(🇦🇪|AE|Dubai|迪拜)/i, flag: "🇦🇪", name: "AE" },
-    // { regex: /(🇧🇷|BR|Brazil|巴西|圣保罗)/i, flag: "🇧🇷", name: "BR" },
-    // { regex: /(🇮🇳|IN|India|印度|孟买|海得拉巴)/i, flag: "🇮🇳", name: "IN" },
-    // { regex: /(🇲🇽|MX|Mexico|墨西哥|克雷塔罗)/i, flag: "🇲🇽", name: "MX" },
-    // { regex: /(🇪🇸|ES|Spain|西班牙|马德里)/i, flag: "🇪🇸", name: "ES" }
+    { regex: /(🇭🇰|\bHK\b|Hong.*Kong|香港)/i, flag: "🇭🇰", name: "HK" },
+    { regex: /(🇯🇵|\bJP\b|Japan|日本|东京|大阪)/i, flag: "🇯🇵", name: "JP" },
+    { regex: /(🇰🇷|\bKR\b|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
+    { regex: /(🇸🇬|\bSG\b|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" },
+    { regex: /(🇹🇼|\bTW\b|Taiwan|台湾|新北|彰化|台北)/i, flag: "🇹🇼", name: "TW" },
+    { regex: /(🇺🇸|\bUS\b|America|United.*States|美国|洛杉矶|硅谷|西雅图|凤凰城|圣何塞)/i, flag: "🇺🇸", name: "US" },
+    { regex: /(🇬🇧|\bUK\b|Britain|United.*Kingdom|英国|伦敦)/i, flag: "🇬🇧", name: "UK" },
+    { regex: /(🇩🇪|\bDE\b|Germany|德国|法兰克福)/i, flag: "🇩🇪", name: "DE" },
+    { regex: /(🇫🇷|\bFR\b|France|法国|巴黎)/i, flag: "🇫🇷", name: "FR" },
+    { regex: /(🇨🇦|\bCA\b|Canada|加拿大)/i, flag: "🇨🇦", name: "CA" },
+    { regex: /(🇦🇺|\bAU\b|Australia|澳大利亚|悉尼)/i, flag: "🇦🇺", name: "AU" },
+    // { regex: /(🇲🇾|\bMY\b|Malaysia|马来西亚)/i, flag: "🇲🇾", name: "MY" },
+    // { regex: /(🇷🇺|\bRU\b|Russia|俄罗斯|莫斯科)/i, flag: "🇷🇺", name: "RU" },
+    // { regex: /(🇦🇪|\bAE\b|Dubai|迪拜)/i, flag: "🇦🇪", name: "AE" },
+    // { regex: /(🇧🇷|\bBR\b|Brazil|巴西|圣保罗)/i, flag: "🇧🇷", name: "BR" },
+    // { regex: /(🇮🇳|\bIN\b|India|印度|孟买|海得拉巴)/i, flag: "🇮🇳", name: "IN" },
+    // { regex: /(🇲🇽|\bMX\b|Mexico|墨西哥|克雷塔罗)/i, flag: "🇲🇽", name: "MX" },
+    // { regex: /(🇪🇸|\bES\b|Spain|西班牙|马德里)/i, flag: "🇪🇸", name: "ES" },
   ];
+  
 
-  // 定义排序优先级
+  // 定义排序优先级，同时作为允许生成国家组的白名单
   const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US"];
 
   // =================================================
@@ -59,26 +60,48 @@ function main(config) {
   // 记录每个节点所属的国家，用于后续零散节点排序
   const nodeCountryMap = {};
 
-  // 1. 为正常节点添加旗帜，并收集国家分类
+  // 1. 处理节点：匹配国家 -> 清理干扰标记 -> 重命名(加旗帜) -> 收集国家分类
+  const cnFlagRegex = /\u{1F1E8}\u{1F1F3}/gu; // 🇨🇳
+
   normalProxies.forEach(proxy => {
-    let matched = false;
+    const originalName = proxy.name;
+
+    let matchedMapping = null;
     for (const mapping of countryMapping) {
-      if (mapping.regex.test(proxy.name)) {
-        if (!proxy.name.startsWith(mapping.flag)) {
-            proxy.name = `${mapping.flag} ${proxy.name}`;
-        }
-        
-        const groupName = mapping.name;
+      if (mapping.regex.test(originalName)) {
+        matchedMapping = mapping;
+        break;
+      }
+    }
+
+    // 1.1 仅清理 CN 标记，保留其他已有旗帜（避免误删稀有节点旗帜）
+    const cleanedName = originalName
+      .replace(cnFlagRegex, "")                 // 移除 🇨🇳
+      .replace(/\bCN\b|\bChina\b/gi, "")        // 移除文本 CN/China
+      .replace(/中国大陆|中国/g, "")               // 移除中文 CN 标识
+      .replace(/\s+/g, " ")
+      .trim();
+
+    if (matchedMapping) {
+      // 1.2 重命名：如果已是目标旗帜开头则不重复添加
+      if (!cleanedName.startsWith(matchedMapping.flag)) {
+        proxy.name = cleanedName ? `${matchedMapping.flag} ${cleanedName}` : matchedMapping.flag;
+      } else {
+        proxy.name = cleanedName;
+      }
+      
+      const groupName = matchedMapping.name;
+      nodeCountryMap[proxy.name] = groupName;
+
+      // 1.3 分组：仅当该国家在 sortOrder 中时，才加入国家分类组
+      if (sortOrder.includes(groupName)) {
         if (!countryNodes[groupName]) {
           countryNodes[groupName] = [];
         }
         countryNodes[groupName].push(proxy.name);
-        nodeCountryMap[proxy.name] = mapping.name;
-        matched = true;
-        break;
       }
-    }
-    if (!matched) {
+    } else {
+      proxy.name = cleanedName || originalName.trim();
       nodeCountryMap[proxy.name] = "others";
     }
   });

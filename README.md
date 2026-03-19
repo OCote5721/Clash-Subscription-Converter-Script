@@ -1,51 +1,37 @@
 # Clash Subscription Converter Script
 
-这是一个用于 Clash (Clash Verge Rev / FlClash 等) 内置 JavaScript 预处理（Script/Merge）功能的自动化脚本。它可以将仅包含节点的初始订阅配置 (`profile.yaml`) 自动转换为具有精细分流规则、按国家地区自动分组排序的高级配置。
+这是一个用于 Clash (Clash Verge Rev / FlClash 等) 内置 JavaScript 预处理（Script/Merge）功能的自动化脚本。它可以将仅包含节点的初始订阅配置自动转换为具有精细分流规则、按国家地区自动分组排序的高级配置。
 
-## 💡 开发初衷
+同时为不具备 JavaScript 功能的客户端准备了功能接近的 YAML 文件。
 
-本项目最初是为了解决某些机场提供的默认节点组和分流规则不符合个人使用习惯的问题。传统的第三方在线订阅转换途径存在诸多弊端：
-- **隐私风险**：存在订阅链接泄露的风险。
-- **转换失败**：部分机场的订阅链接为“阅后即焚”，导致第三方转换服务无法拉取。
-- **被动封锁**：越来越多的机场开始主动屏蔽已知的在线订阅转换器 IP。
+## 功能
 
-使用本项目，**所有的解析和转换工作都在你的本地客户端内完成**。只要你的 Clash 客户端支持 JavaScript 预处理脚本，即可实现安全、私密、高度自定义的订阅转换。
+- 通过正则表达式自动识别节点名称，按国家分类并生成对应的 `url-test`（自动测速）策略组。（可自定义）
+- 自动排除非国家或地区的信息节点，可自定义是否启用（默认禁用）
+- 自动在匹配到的节点名称前加上对应的 Emoji 旗帜（如 `🇭🇰`）。
+- 将节点按照国家重新排序，并支持自定义顺序。
+- 使用远程规则，规则采用 `rule-set` 模式，按需添加规则集。
+- 脚本内完全接管了 `proxy-groups`, `rule-providers` 和 `rules`，你的初始订阅仅需要包含有效的 `proxies` 节点列表。
 
-## ✨ 特性
+## 如何使用
 
-- **🌍 自动国家分组**：通过正则表达式自动识别节点名称，按国家（如 HK, TW, JP, SG, US, KR 等）分类并生成对应的 `url-test`（自动测速）策略组。
-- **🚩 智能添加旗帜**：自动在匹配到的节点名称前加上对应的 Emoji 旗帜（如 `🇭🇰`），且保证节点组名纯净（无图标），保持界面整洁。
-- **🔀 智能排序逻辑**：
-  - 国家节点组优先级排序：默认按照 `HK -> JP -> KR -> SG -> TW -> US` 顺序排列。
-  - 零散节点排序：在「主代理」组中，节点同样按照国家优先级排序，未能识别的节点会自动归入 "others" 放在最后，确保长列表井然有序。
-- **🛠️ 强力分流规则注入**：内置常用的 Rule-Providers（包含 Apple, Google, Microsoft, Netflix, Steam, Bilibili 等），直接在脚本内硬编码注入，**并且采用远端分流规则集，配置能够自动保持最新，无需频繁更新分流规则**。
-- **🎯 纯净代理组**：移除了传统配置中冗余的“自动选择”和“负载均衡”，直接将国家组和所有具体节点展示在「主代理」和各个应用策略组中，并在合适的位置插入 `DIRECT` 直连。
+仅使用于 Mihomo (Clash Meta) 内核，需要客户端支持 JavaScript 脚本功能。
 
-## 🚀 如何使用
+1. 从仓库或者 Release 里找到 `clash-script.js` 文件，或者使用下面的链接导入
 
-本项目支持所有**具备 JavaScript 预处理**的 Clash 客户端中使用。以 **Clash Verge Rev** 为例：
+   ``` url
+   https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/clash-script.js
+   
+   https://cdn.jsdmirror.com/gh/OCote5721/Clash-Subscription-Converter-Script@main/clash-script.js  
+   ```
 
-1. 打开 Clash Verge Rev 的 **订阅 (Subscriptions)** 页面。
-2. 右键点击你的基础节点订阅，选择 **编辑 (Edit)**。
-3. 找到 **扩展脚本 (Extend Script)** 选项。
-4. 将本项目中的 `clash-script.js` 文件内容完整复制并粘贴进去，或者指定本地该 JS 文件的路径。
-5. 保存并更新订阅。客户端在拉取节点后，会自动执行此脚本进行规则注入和节点重组。
+   
 
-> [!NOTE]
->
-> 由于脚本内完全接管了 `proxy-groups`, `rule-providers` 和 `rules`，你的初始订阅仅需要包含有效的 `proxies` 节点列表即可。
+2. 复制脚本内完整的代码，并粘贴到客户端的 JavaScript 扩展脚本内。
 
-> [!TIP]
->
-> 在支持 URL 导入 JavaScript 脚本的客户端中（例如 FlClash），可以从下面两个链接导入最新版本的脚本
->
-> https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/clash-script.js
->
-> https://cdn.jsdmirror.com/gh/OCote5721/Clash-Subscription-Converter-Script@main/clash-script.js
+   
 
-
-
-## ⚙️ 个性化定制
+## 个性化定制
 
 如果你想将这个脚本用于更广泛的场景，可以直接修改 `clash-script.js` 开头的几个变量：
 
@@ -71,14 +57,14 @@ const SHOW_DIRECT_IN_MAIN = true;
 ```javascript
 const countryMapping = [
   // ...
-  { regex: /(🇰🇷|KR|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
-  { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" }, // 添加新的国家
+  { regex: /(🇰🇷|\bKR\b|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
+  { regex: /(🇸🇬|\bSG\b|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" }, // 添加新的国家
 ];
 ```
 *注：脚本具有容错性，如果订阅中没有匹配到某个国家，则不会生成对应的空白节点组。*
 
 ### 3. 更改排序优先级
-修改 `sortOrder` 数组来决定策略组和节点在列表中的展示顺序：
+修改 `sortOrder` 数组来决定策略组和节点在列表中的展示顺序，并且此列表将用于控制生成的国家分组：
 ```javascript
 const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US"];
 ```
@@ -93,12 +79,69 @@ if (appName === "中国大陆网站" || appName === "Bilibili") {
 }
 ```
 
-## 📝 文件说明
+
+
+## YAML 文件说明
+
+Clash Meta For Android 不支持 JavaScript 脚本扩展，因此准备了 YAML 模板文件 `proxy-providers.yaml`，按照下面的说明修改后直接导入客户端。
+
+### 1. 填入订阅链接
+
+在 `url` 里填入订阅链接，并在 `path` 里填写保存的文件名
+
+``` yaml
+    url: ""
+    path: ./proxies/.yaml
+```
+
+### 2. 添加更多国家和地区
+
+如果原始订阅包含旗帜，需要在此处增加对应的旗帜防止重复生成
+
+``` yaml
+- pattern: "^[🇭🇰🇯🇵🇰🇷🇸🇬🇹🇼🇺🇸🇬🇧🇩🇪🇫🇷🇨🇦🇦🇺🇨🇳]+\\s*"
+  target: ""
+```
+
+然后仿照模板在后面增加正则表达式
+
+``` yaml
+- pattern: '(?i)^(.*(🇭🇰|\bHK\b|Hong.*Kong|香港).*)$'
+  target: '🇭🇰 $1'
+```
+
+### 3. 增加国家分组
+
+由于 YAML 无法使用判别式自动生成国家分组，需要手动在后面补充
+
+``` yaml
+  - name: HK
+    type: url-test
+    url: "https://cp.cloudflare.com"
+    interval: 180
+    lazy: false
+    include-all: true
+    filter: "🇭🇰"
+```
+
+### 4. 链接下载
+
+可使用下面的链接下载，但不要去更新，更新后会覆盖修改内容。
+
+``` url
+https://raw.githubusercontent.com/OCote5721/Clash-Subscription-Converter-Script/main/proxy-providers.yaml
+
+https://cdn.jsdmirror.com/gh/OCote5721/Clash-Subscription-Converter-Script@main/proxy-providers.yaml  
+```
+
+
+
+##  文件说明
 
 - `clash-script.js`: 核心处理脚本，用于客户端内置 JS 预处理。
-- `config-clash.yaml` : 分流规则模板。（感谢 MITCE 机场的配置文件作为参考）
-- `profile.yaml` : 已脱敏的基础订阅文件结构示例，供开发测试使用。
 
-## 📄 License
+- `proxy-providers.yaml` : 功能相近 YAML 模板文件。
 
-MIT License
+- `example.yaml`: 经过 JS 脚本处理后的参考文件。
+
+  
