@@ -12,24 +12,24 @@ function main(config) {
   // 你可以在这里继续添加你需要分类的国家或地区，如果没有匹配到相应的节点，则不会生成该分组
   // 提示：去除了 ^ 开头限制，以便更好地匹配已经带有旗帜或其他前缀的节点名称
   const countryMapping = [
-    { regex: /(🇭🇰|\bHK\b|Hong.*Kong|香港)/i, flag: "🇭🇰", name: "HK" },
-    { regex: /(🇯🇵|\bJP\b|Japan|日本|东京|大阪)/i, flag: "🇯🇵", name: "JP" },
-    { regex: /(🇰🇷|\bKR\b|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
-    { regex: /(🇸🇬|\bSG\b|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" },
-    { regex: /(🇹🇼|\bTW\b|Taiwan|台湾|新北|彰化|台北)/i, flag: "🇹🇼", name: "TW" },
-    { regex: /(🇺🇸|\bUS\b|America|United.*States|美国|洛杉矶|硅谷|西雅图|凤凰城|圣何塞)/i, flag: "🇺🇸", name: "US" },
-    { regex: /(🇬🇧|\bUK\b|Britain|United.*Kingdom|英国|伦敦)/i, flag: "🇬🇧", name: "UK" },
-    { regex: /(🇩🇪|\bDE\b|Germany|德国|法兰克福)/i, flag: "🇩🇪", name: "DE" },
-    { regex: /(🇫🇷|\bFR\b|France|法国|巴黎)/i, flag: "🇫🇷", name: "FR" },
-    { regex: /(🇨🇦|\bCA\b|Canada|加拿大)/i, flag: "🇨🇦", name: "CA" },
-    { regex: /(🇦🇺|\bAU\b|Australia|澳大利亚|悉尼)/i, flag: "🇦🇺", name: "AU" },
-    // { regex: /(🇲🇾|\bMY\b|Malaysia|马来西亚)/i, flag: "🇲🇾", name: "MY" },
-    // { regex: /(🇷🇺|\bRU\b|Russia|俄罗斯|莫斯科)/i, flag: "🇷🇺", name: "RU" },
-    // { regex: /(🇦🇪|\bAE\b|Dubai|迪拜)/i, flag: "🇦🇪", name: "AE" },
-    // { regex: /(🇧🇷|\bBR\b|Brazil|巴西|圣保罗)/i, flag: "🇧🇷", name: "BR" },
-    // { regex: /(🇮🇳|\bIN\b|India|印度|孟买|海得拉巴)/i, flag: "🇮🇳", name: "IN" },
-    // { regex: /(🇲🇽|\bMX\b|Mexico|墨西哥|克雷塔罗)/i, flag: "🇲🇽", name: "MX" },
-    // { regex: /(🇪🇸|\bES\b|Spain|西班牙|马德里)/i, flag: "🇪🇸", name: "ES" },
+    { regex: /(🇭🇰|HK|Hong.*Kong|香港)/, flag: "🇭🇰", name: "HK" },
+    { regex: /(🇯🇵|JP|Japan|日本|东京|大阪)/, flag: "🇯🇵", name: "JP" },
+    { regex: /(🇰🇷|KR|Korea|韩国|首尔)/, flag: "🇰🇷", name: "KR" },
+    { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/, flag: "🇸🇬", name: "SG" },
+    { regex: /(🇹🇼|TW|Taiwan|台湾|新北|彰化|台北)/, flag: "🇹🇼", name: "TW" },
+    { regex: /(🇺🇸|US|America|United.*States|美国|洛杉矶|硅谷|西雅图|凤凰城|圣何塞)/, flag: "🇺🇸", name: "US" },
+    { regex: /(🇬🇧|UK|Britain|United.*Kingdom|英国|伦敦)/, flag: "🇬🇧", name: "UK" },
+    { regex: /(🇩🇪|DE|Germany|德国|法兰克福)/, flag: "🇩🇪", name: "DE" },
+    { regex: /(🇫🇷|FR|France|法国|巴黎)/, flag: "🇫🇷", name: "FR" },
+    { regex: /(🇨🇦|CA|Canada|加拿大)/, flag: "🇨🇦", name: "CA" },
+    { regex: /(🇦🇺|AU|Australia|澳大利亚|悉尼)/, flag: "🇦🇺", name: "AU" },
+    // { regex: /(🇲🇾|MY|Malaysia|马来西亚)/, flag: "🇲🇾", name: "MY" },
+    // { regex: /(🇷🇺|RU|Russia|俄罗斯|莫斯科)/, flag: "🇷🇺", name: "RU" },
+    // { regex: /(🇦🇪|AE|Dubai|迪拜)/, flag: "🇦🇪", name: "AE" },
+    // { regex: /(🇧🇷|BR|Brazil|巴西|圣保罗)/, flag: "🇧🇷", name: "BR" },
+    // { regex: /(🇮🇳|IN|India|印度|孟买|海得拉巴)/, flag: "🇮🇳", name: "IN" },
+    // { regex: /(🇲🇽|MX|Mexico|墨西哥|克雷塔罗)/, flag: "🇲🇽", name: "MX" },
+    // { regex: /(🇪🇸|ES|Spain|西班牙|马德里)/, flag: "🇪🇸", name: "ES" },
   ];
   
 
@@ -77,7 +77,7 @@ function main(config) {
     // 1.1 仅清理 CN 标记，保留其他已有旗帜（避免误删稀有节点旗帜）
     const cleanedName = originalName
       .replace(cnFlagRegex, "")                 // 移除 🇨🇳
-      .replace(/\bCN\b|\bChina\b/gi, "")        // 移除文本 CN/China
+      .replace(/CN|China/g, "")        // 移除文本 CN/China
       .replace(/中国大陆|中国/g, "")               // 移除中文 CN 标识
       .replace(/\s+/g, " ")
       .trim();
