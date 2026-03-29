@@ -48,7 +48,7 @@ proxy-groups:
       - SG
       - TW
       - US
-      # - DIRCET
+      # - DIRECT
   - name: "Google"
     type: select
     proxies:

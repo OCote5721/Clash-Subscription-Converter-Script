@@ -58,8 +58,8 @@ const SHOW_DIRECT_IN_MAIN = true;
 ```javascript
 const countryMapping = [
   // ...
-  { regex: /(🇰🇷|\bKR\b|Korea|韩国|首尔)/i, flag: "🇰🇷", name: "KR" },
-  { regex: /(🇸🇬|\bSG\b|Singapore|新加坡|狮城)/i, flag: "🇸🇬", name: "SG" }, // 添加新的国家
+  { regex: /(🇰🇷|KR|Korea|韩国|首尔)/, flag: "🇰🇷", name: "KR" },
+  { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/, flag: "🇸🇬", name: "SG" }, // 添加新的国家
 ];
 ```
 *注：脚本具有容错性，如果订阅中没有匹配到某个国家，则不会生成对应的空白节点组。*
@@ -107,7 +107,7 @@ Clash Meta For Android 不支持 JavaScript 脚本扩展，因此准备了 YAML 
 然后仿照模板在后面增加正则表达式
 
 ``` yaml
-- pattern: '(?i)^(.*(🇭🇰|\bHK\b|Hong.*Kong|香港).*)$'
+- pattern: '^(.*(🇭🇰|HK|Hong.*Kong|香港).*)$'
   target: '🇭🇰 $1'
 ```
 
@@ -118,8 +118,8 @@ Clash Meta For Android 不支持 JavaScript 脚本扩展，因此准备了 YAML 
 ``` yaml
   - name: HK
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇭🇰"
