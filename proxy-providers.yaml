@@ -5,8 +5,8 @@ proxy-providers:
 # 填写这两个参数
     url: ""
     path: ./proxies/.yaml
-# ============================== 
     interval: 86400
+# ============================== 
     override:
       proxy-name:
         # 如果你的机场节点本身可能自带 emoji，为了防止叠加成 "🇭🇰 🇭🇰 香港"，可以先统一清理句首的常见 emoji 和空格（可选）
@@ -48,41 +48,8 @@ proxy-groups:
       - SG
       - TW
       - US
-      - DIRECT
-  - name: "中国大陆网站"
-    type: select
-    proxies:
-      - DIRECT
-      - 主代理
-      - HK
-      - JP
-      - KR
-      - SG
-      - TW
-      - US
-  - name: "黑名单网站"
-    type: select
-    proxies:
-      - 主代理
-      - DIRECT
-      - HK
-      - JP
-      - KR
-      - SG
-      - TW
-      - US
+      # - DIRCET
   - name: "Google"
-    type: select
-    proxies:
-      - 主代理
-      - DIRECT
-      - HK
-      - JP
-      - KR
-      - SG
-      - TW
-      - US
-  - name: "Apple"
     type: select
     proxies:
       - 主代理
@@ -104,7 +71,7 @@ proxy-groups:
       - SG
       - TW
       - US
-  - name: "Bahamut"
+  - name: "OpenAI"
     type: select
     proxies:
       - 主代理
@@ -115,18 +82,7 @@ proxy-groups:
       - SG
       - TW
       - US
-  - name: "Bilibili"
-    type: select
-    proxies:
-      - DIRECT
-      - 主代理
-      - HK
-      - JP
-      - KR
-      - SG
-      - TW
-      - US
-  - name: "Discord"
+  - name: "Twitter"
     type: select
     proxies:
       - 主代理
@@ -137,7 +93,7 @@ proxy-groups:
       - SG
       - TW
       - US
-  - name: "GoogleFCM"
+  - name: "Youtube"
     type: select
     proxies:
       - 主代理
@@ -159,7 +115,7 @@ proxy-groups:
       - SG
       - TW
       - US
-  - name: "OpenAI"
+  - name: "Disney"
     type: select
     proxies:
       - 主代理
@@ -170,7 +126,18 @@ proxy-groups:
       - SG
       - TW
       - US
-  - name: "Speedtest"
+  - name: "Hbomax"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "Apple"
     type: select
     proxies:
       - 主代理
@@ -213,6 +180,17 @@ proxy-groups:
       - KR
       - SG
       - TW
+      - US  
+  - name: "Discord"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
       - US
   - name: "TikTok"
     type: select
@@ -225,45 +203,116 @@ proxy-groups:
       - SG
       - TW
       - US
+  - name: "GoogleFCM"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "Speedtest"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "Bilibili"
+    type: select
+    proxies:
+      - DIRECT
+      - 主代理
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "Bahamut"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "China"
+    type: select
+    proxies:
+      - DIRECT
+      - 主代理
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "GFWList"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+  - name: "Final"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
   - name: HK
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇭🇰"
   - name: JP
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇯🇵"
   - name: KR
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇰🇷"
   - name: SG
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇸🇬"
   - name: TW
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇹🇼"
   - name: US
     type: url-test
-    url: "https://cp.cloudflare.com"
-    interval: 180
+    url: "http://www.gstatic.com/generate_204"
+    interval: 600
     lazy: false
     include-all: true
     filter: "🇺🇸"
@@ -283,7 +332,7 @@ profile:
   store-fake-ip: true
 unified-delay: true
 tcp-concurrent: true
-global-ua: clash.meta
+# global-ua: clash.meta
 
 sniffer:
   enable: true
@@ -352,7 +401,9 @@ dns:
     "rule-set:Bahamut-Site": "https://cloudflare-dns.com/dns-query#Bahamut"
     "rule-set:Bilibili-Site": "https://dns.alidns.com/dns-query#Bilibili"
     "rule-set:Discord-Site": "https://cloudflare-dns.com/dns-query#Discord"
+    "rule-set:Disney-Site": "https://cloudflare-dns.com/dns-query#Disney"
     "rule-set:GoogleFCM-Site": "https://cloudflare-dns.com/dns-query#GoogleFCM"
+    "rule-set:Hbomax-Site": "https://cloudflare-dns.com/dns-query#Hbomax"
     "rule-set:Netflix-Site": "https://cloudflare-dns.com/dns-query#Netflix"
     "rule-set:OpenAI-Site": "https://cloudflare-dns.com/dns-query#OpenAI"
     "rule-set:Speedtest-Site": "https://cloudflare-dns.com/dns-query#Speedtest"
@@ -360,11 +411,13 @@ dns:
     "rule-set:Steam-Site": "https://doh.pub/dns-query#Steam"
     "rule-set:Telegram-Site": "https://cloudflare-dns.com/dns-query#Telegram"
     "rule-set:TikTok-Site": "https://cloudflare-dns.com/dns-query#TikTok"
+    "rule-set:Twitter-Site": "https://cloudflare-dns.com/dns-query#Twitter"
+    "rule-set:Youtube-Site": "https://cloudflare-dns.com/dns-query#Youtube"
     "rule-set:Apple-Site": "https://doh.pub/dns-query#Apple"
     "rule-set:Google-Site": "https://cloudflare-dns.com/dns-query#Google"
     "rule-set:Microsoft-Site": "https://doh.pub/dns-query#Microsoft"
-    "rule-set:GFWList-Site": "https://cloudflare-dns.com/dns-query#黑名单网站"
-    "rule-set:China-Site": "https://dns.alidns.com/dns-query#中国大陆网站"
+    "rule-set:GFWList-Site": "https://cloudflare-dns.com/dns-query#GFWList"
+    "rule-set:China-Site": "https://dns.alidns.com/dns-query#China"
 
 tun:
   enable: true
@@ -378,233 +431,279 @@ tun:
   mtu: 1500
   endpoint-independent-nat: true
 rule-providers:
-  Apple-Site:
-    type: http
-    behavior: domain
-    format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Apple/Apple-Site.mrs'
-    path: ./ruleset/Apple-Site.mrs
-    proxy: DIRECT
-    interval: 86400
-
   Apple-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Apple/Apple-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Apple/Apple-IP.mrs'
     path: ./ruleset/Apple-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  Apple-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Apple/Apple-Site.mrs'
+    path: ./ruleset/Apple-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   Bahamut-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Bahamut/Bahamut-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Bahamut/Bahamut-Site.mrs'
     path: ./ruleset/Bahamut-Site.mrs
     proxy: DIRECT
-    interval: 86400
-
-  Bilibili-Site:
-    type: http
-    behavior: domain
-    format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Bilibili/Bilibili-Site.mrs'
-    path: ./ruleset/Bilibili-Site.mrs
-    proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   Bilibili-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Bilibili/Bilibili-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Bilibili/Bilibili-IP.mrs'
     path: ./ruleset/Bilibili-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
-  China-Site:
+  Bilibili-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/China/China-Site.mrs'
-    path: ./ruleset/China-Site.mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Bilibili/Bilibili-Site.mrs'
+    path: ./ruleset/Bilibili-Site.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   China-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/China/China-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/China/China-IP.mrs'
     path: ./ruleset/China-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  China-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/China/China-Site.mrs'
+    path: ./ruleset/China-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   Discord-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Discord/Discord-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Discord/Discord-Site.mrs'
     path: ./ruleset/Discord-Site.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+  
+  Disney-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/disney.mrs'
+    path: ./ruleset/Disney-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   GFWList-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/GFWList/GFWList-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/GFWList/GFWList-Site.mrs'
     path: ./ruleset/GFWList-Site.mrs
     proxy: DIRECT
-    interval: 86400
-
-  Google-Site:
-    type: http
-    behavior: domain
-    format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Google/Google-Site.mrs'
-    path: ./ruleset/Google-Site.mrs
-    proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   Google-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Google/Google-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Google/Google-IP.mrs'
     path: ./ruleset/Google-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  Google-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Google/Google-Site.mrs'
+    path: ./ruleset/Google-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   GoogleFCM-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/GoogleFCM/GoogleFCM-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/GoogleFCM/GoogleFCM-Site.mrs'
     path: ./ruleset/GoogleFCM-Site.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+  
+  Hbomax-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/hbo.mrs'
+    path: ./ruleset/Hbomax-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   Local-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Local/Local-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Local/Local-IP.mrs'
     path: ./ruleset/Local-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   Microsoft-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Microsoft/Microsoft-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Microsoft/Microsoft-Site.mrs'
     path: ./ruleset/Microsoft-Site.mrs
     proxy: DIRECT
-    interval: 86400
-
-  Netflix-Site:
-    type: http
-    behavior: domain
-    format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Netflix/Netflix-Site.mrs'
-    path: ./ruleset/Netflix-Site.mrs
-    proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   Netflix-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Netflix/Netflix-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Netflix/Netflix-IP.mrs'
     path: ./ruleset/Netflix-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
-  OpenAI-Site:
+  Netflix-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/OpenAI/OpenAI-Site.mrs'
-    path: ./ruleset/OpenAI-Site.mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Netflix/Netflix-Site.mrs'
+    path: ./ruleset/Netflix-Site.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   OpenAI-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/OpenAI/OpenAI-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/OpenAI/OpenAI-IP.mrs'
     path: ./ruleset/OpenAI-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  OpenAI-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/OpenAI/OpenAI-Site.mrs'
+    path: ./ruleset/OpenAI-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   Speedtest-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Speedtest/Speedtest-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Speedtest/Speedtest-Site.mrs'
     path: ./ruleset/Speedtest-Site.mrs
     proxy: DIRECT
-    interval: 86400
-
-  Spotify-Site:
-    type: http
-    behavior: domain
-    format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Spotify/Spotify-Site.mrs'
-    path: ./ruleset/Spotify-Site.mrs
-    proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   Spotify-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Spotify/Spotify-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Spotify/Spotify-IP.mrs'
     path: ./ruleset/Spotify-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  Spotify-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Spotify/Spotify-Site.mrs'
+    path: ./ruleset/Spotify-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   Steam-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Steam/Steam-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Steam/Steam-Site.mrs'
     path: ./ruleset/Steam-Site.mrs
     proxy: DIRECT
-    interval: 86400
-
-  Telegram-Site:
-    type: http
-    behavior: domain
-    format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Telegram/Telegram-Site.mrs'
-    path: ./ruleset/Telegram-Site.mrs
-    proxy: DIRECT
-    interval: 86400
+    interval: 604800
 
   Telegram-IP:
     type: http
     behavior: ipcidr
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/Telegram/Telegram-IP.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Telegram/Telegram-IP.mrs'
     path: ./ruleset/Telegram-IP.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  Telegram-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Telegram/Telegram-Site.mrs'
+    path: ./ruleset/Telegram-Site.mrs
+    proxy: DIRECT
+    interval: 604800
 
   TikTok-Site:
     type: http
     behavior: domain
     format: mrs
-    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.0/mihomo/TikTok/TikTok-Site.mrs'
+    url: 'https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/TikTok/TikTok-Site.mrs'
     path: ./ruleset/TikTok-Site.mrs
     proxy: DIRECT
-    interval: 86400
+    interval: 604800
+
+  Twitter-IP:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/twitter.mrs'
+    path: ./ruleset/Twitter-IP.mrs
+    proxy: DIRECT
+    interval: 604800
+
+  Twitter-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/twitter.mrs'
+    path: ./ruleset/Twitter-Site.mrs
+    proxy: DIRECT
+    interval: 604800
+  
+  Youtube-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/youtube.mrs'
+    path: ./ruleset/Youtube-Site.mrs
+    proxy: DIRECT
+    interval: 604800
+
 
 rules:
-  - "AND,((DST-PORT,443),(NETWORK,UDP)),REJECT"
+  # - "AND,((DST-PORT,443),(NETWORK,UDP)),REJECT"
   - "DOMAIN,ntp.aliyun.com,DIRECT"
   - "DOMAIN-KEYWORD,msftconnecttest.com,主代理"
   - "DOMAIN-KEYWORD,msftncsi.com,主代理"
@@ -620,18 +719,23 @@ rules:
   - "RULE-SET,Steam-Site,Steam"
   - "RULE-SET,Telegram-Site,Telegram"
   - "RULE-SET,TikTok-Site,TikTok"
+  - "RULE-SET,Twitter-Site,Twitter"
+  - "RULE-SET,Youtube-Site,Youtube"
+  - "RULE-SET,Disney-Site,Disney"
+  - "RULE-SET,Hbomax-Site,Hbomax"
   - "RULE-SET,Apple-Site,Apple"
   - "RULE-SET,Google-Site,Google"
   - "RULE-SET,Microsoft-Site,Microsoft"
-  - "RULE-SET,GFWList-Site,黑名单网站"
-  - "RULE-SET,China-Site,中国大陆网站"
+  - "RULE-SET,GFWList-Site,GFWList"
+  - "RULE-SET,China-Site,China"
   - "RULE-SET,Local-IP,DIRECT,no-resolve"
   - "RULE-SET,Bilibili-IP,Bilibili"
   - "RULE-SET,Netflix-IP,Netflix"
   - "RULE-SET,OpenAI-IP,OpenAI"
   - "RULE-SET,Spotify-IP,Spotify"
   - "RULE-SET,Telegram-IP,Telegram"
+  - "RULE-SET,Twitter-IP,Twitter"
   - "RULE-SET,Apple-IP,Apple"
   - "RULE-SET,Google-IP,Google"
-  - "RULE-SET,China-IP,中国大陆网站"
-  - "MATCH,主代理"
+  - "RULE-SET,China-IP,China"
+  - "MATCH,Final"
