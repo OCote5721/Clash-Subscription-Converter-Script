@@ -140,8 +140,8 @@ proxy-groups:
   - name: "Apple"
     type: select
     proxies:
-      - 主代理
       - DIRECT
+      - 主代理
       - HK
       - JP
       - KR

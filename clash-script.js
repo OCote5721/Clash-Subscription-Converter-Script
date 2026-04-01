@@ -192,7 +192,7 @@ function main(config) {
   appGroupNames.forEach(appName => {
     let appProxies = ["主代理", "DIRECT", ...countryGroupNames];
     
-    if (appName === "China" || appName === "Bilibili") {
+    if (appName === "China" || appName === "Bilibili" || appName === "Apple") {
         appProxies = ["DIRECT", "主代理", ...countryGroupNames];
     }
 
