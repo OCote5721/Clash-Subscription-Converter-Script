@@ -129,7 +129,7 @@ function main(config) {
     countryProxyGroups.push({
       name: groupName,
       type: "url-test",
-      url: "http://www.gstatic.com/generate_204",
+      url: "https://www.gstatic.com/generate_204",
       interval: 600,
       lazy: false,
       proxies: countryNodes[groupName]
