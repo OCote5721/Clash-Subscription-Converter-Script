@@ -9,8 +9,8 @@ proxy-providers:
 # ============================== 
     override:
       proxy-name:
-        # 如果你的机场节点本身可能自带 emoji，为了防止叠加成 "🇭🇰 🇭🇰 香港"，可以先统一清理句首的常见 emoji 和空格（可选）
-        - pattern: "^[🇭🇰🇯🇵🇰🇷🇸🇬🇹🇼🇺🇸🇬🇧🇩🇪🇫🇷🇨🇦🇦🇺🇨🇳]+\\s*"
+        # 清理句首已知旗帜，防止叠加；使用“完整旗帜”匹配，避免字符类误删稀有国家旗帜
+        - pattern: "^((🇭🇰|🇯🇵|🇰🇷|🇸🇬|🇹🇼|🇺🇸|🇬🇧|🇩🇪|🇫🇷|🇨🇦|🇦🇺|🇨🇳)\\s*)+"
           target: ""
         
         # 将匹配到的节点名整体捕获为 $1，并在开头加上对应的国旗
@@ -36,6 +36,13 @@ proxy-providers:
           target: '🇨🇦 $1'
         - pattern: '^(.*(🇦🇺|AU|Australia|澳大利亚|悉尼).*)$'
           target: '🇦🇺 $1'
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 600
+      timeout: 5000
+      lazy: false
+      expected-status: 204
 
 proxy-groups:
   - name: 主代理
