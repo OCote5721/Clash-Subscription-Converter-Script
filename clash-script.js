@@ -56,6 +56,7 @@ function main(config) {
   
   // 用于存储检测到的国家节点
   const countryNodes = {};
+  const otherProxyNames = [];
   
   // 记录每个节点所属的国家，用于后续零散节点排序
   const nodeCountryMap = {};
@@ -99,10 +100,13 @@ function main(config) {
           countryNodes[groupName] = [];
         }
         countryNodes[groupName].push(proxy.name);
+      } else {
+        otherProxyNames.push(proxy.name);
       }
     } else {
       proxy.name = cleanedName || originalName.trim();
       nodeCountryMap[proxy.name] = "others";
+      otherProxyNames.push(proxy.name);
     }
   });
 
@@ -136,31 +140,11 @@ function main(config) {
     });
   });
 
-  // 对所有正常节点名称进行排序
-  const allProxyNames = normalProxies.map(p => p.name).sort((nameA, nameB) => {
-    const countryA = nodeCountryMap[nameA];
-    const countryB = nodeCountryMap[nameB];
-    
-    if (countryA === countryB) {
-      return nameA.localeCompare(nameB);
-    }
-    
-    if (countryA === "others") return 1;
-    if (countryB === "others") return -1;
-    
-    const indexA = sortOrder.indexOf(countryA);
-    const indexB = sortOrder.indexOf(countryB);
-    
-    if (indexA !== -1 && indexB !== -1) {
-      return indexA - indexB;
-    } else if (indexA !== -1) {
-      return -1;
-    } else if (indexB !== -1) {
-      return 1;
-    } else {
-      return countryA.localeCompare(countryB);
-    }
-  });
+  // 主代理中按国家组顺序衔接；每个国家内部保留输入顺序
+  const allProxyNames = [
+    ...sortOrder.flatMap(groupName => countryNodes[groupName] || []),
+    ...otherProxyNames
+  ];
 
   // 2. 构建新的代理组
   const newProxyGroups = [];
