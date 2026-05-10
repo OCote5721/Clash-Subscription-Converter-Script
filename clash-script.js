@@ -58,11 +58,10 @@ function main(config) {
   const countryNodes = {};
   const otherProxyNames = [];
   
-  // 记录每个节点所属的国家，用于后续零散节点排序
-  const nodeCountryMap = {};
-
   // 1. 处理节点：匹配国家 -> 清理干扰标记 -> 重命名(加旗帜) -> 收集国家分类
   const cnFlagRegex = /\u{1F1E8}\u{1F1F3}/gu; // 🇨🇳
+  const normalizeFlagSpacing = name =>
+    name.replace(/^([\u{1F1E6}-\u{1F1FF}]{2})\s*/u, "$1 ");
 
   normalProxies.forEach(proxy => {
     const originalName = proxy.name;
@@ -90,9 +89,9 @@ function main(config) {
       } else {
         proxy.name = cleanedName;
       }
+      proxy.name = normalizeFlagSpacing(proxy.name);
       
       const groupName = matchedMapping.name;
-      nodeCountryMap[proxy.name] = groupName;
 
       // 1.3 分组：仅当该国家在 sortOrder 中时，才加入国家分类组
       if (sortOrder.includes(groupName)) {
@@ -105,7 +104,7 @@ function main(config) {
       }
     } else {
       proxy.name = cleanedName || originalName.trim();
-      nodeCountryMap[proxy.name] = "others";
+      proxy.name = normalizeFlagSpacing(proxy.name);
       otherProxyNames.push(proxy.name);
     }
   });
