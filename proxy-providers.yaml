@@ -78,6 +78,26 @@ proxy-groups:
       - SG
       - TW
       - US
+  - name: "PayPal"
+    type: select
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
+    proxies:
+      - 主代理
+      - DIRECT
+      - HK
+      - JP
+      - KR
+      - SG
+      - TW
+      - US
   - name: "OpenAI"
     type: select
     proxies:
@@ -412,6 +432,7 @@ dns:
     "rule-set:GoogleFCM-Site": "https://cloudflare-dns.com/dns-query#GoogleFCM"
     "rule-set:Hbomax-Site": "https://cloudflare-dns.com/dns-query#Hbomax"
     "rule-set:Netflix-Site": "https://cloudflare-dns.com/dns-query#Netflix"
+    "rule-set:PayPal-Site": "https://cloudflare-dns.com/dns-query#PayPal"
     "rule-set:OpenAI-Site": "https://cloudflare-dns.com/dns-query#OpenAI"
     "rule-set:Speedtest-Site": "https://cloudflare-dns.com/dns-query#Speedtest"
     "rule-set:Spotify-Site": "https://cloudflare-dns.com/dns-query#Spotify"
@@ -618,6 +639,15 @@ rule-providers:
     proxy: DIRECT
     interval: 604800
 
+  PayPal-Site:
+    type: http
+    behavior: domain
+    format: mrs
+    url: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/paypal.mrs'
+    path: ./ruleset/PayPal-Site.mrs
+    proxy: DIRECT
+    interval: 604800
+
   Speedtest-Site:
     type: http
     behavior: domain
@@ -718,6 +748,7 @@ rules:
   - "RULE-SET,Bahamut-Site,Bahamut"
   - "RULE-SET,Bilibili-Site,Bilibili"
   - "RULE-SET,Discord-Site,Discord"
+  - "RULE-SET,PayPal-Site,PayPal"
   - "RULE-SET,GoogleFCM-Site,GoogleFCM"
   - "RULE-SET,Netflix-Site,Netflix"
   - "RULE-SET,OpenAI-Site,OpenAI"

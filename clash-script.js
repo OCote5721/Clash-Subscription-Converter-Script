@@ -167,7 +167,7 @@ function main(config) {
 
   // 应用分类策略组
   const appGroupNames = [
-    "Google", "Microsoft", "OpenAI", "Twitter", "Youtube", "Netflix", "Disney", "Hbomax",
+    "Google", "Microsoft", "PayPal", "OpenAI", "Twitter", "Youtube", "Netflix", "Disney", "Hbomax",
     "Apple", "Spotify", "Steam", "Telegram", "Discord", "TikTok",
     "GoogleFCM", "Speedtest", "Bilibili","Bahamut", "China", "GFWList", "Final"
   ];
@@ -375,6 +375,15 @@ function main(config) {
       proxy: "DIRECT",
       interval: 604800
     },
+    "PayPal-Site":{
+      type: "http",
+      behavior: "domain",
+      format: "mrs",
+      url: "https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/paypal.mrs",
+      path: "./ruleset/PayPal-Site.mrs",
+      proxy: "DIRECT",
+      interval: 604800
+    },
     "Speedtest-Site": {
       type: "http",
       behavior: "domain",
@@ -476,6 +485,7 @@ function main(config) {
     "DOMAIN-KEYWORD,googleapis,Google",
     "RULE-SET,Bahamut-Site,Bahamut",
     "RULE-SET,Bilibili-Site,Bilibili",
+    "RULE-SET,PayPal-Site,PayPal",
     "RULE-SET,Discord-Site,Discord",
     "RULE-SET,GoogleFCM-Site,GoogleFCM",
     "RULE-SET,Netflix-Site,Netflix",
@@ -623,6 +633,7 @@ function main(config) {
       "rule-set:Hbomax-Site": "https://cloudflare-dns.com/dns-query#Hbomax",
       "rule-set:Netflix-Site": "https://cloudflare-dns.com/dns-query#Netflix",
       "rule-set:OpenAI-Site": "https://cloudflare-dns.com/dns-query#OpenAI",
+      "rule-set:PayPal-Site": "https://cloudflare-dns.com/dns-query#PayPal",
       "rule-set:Speedtest-Site": "https://cloudflare-dns.com/dns-query#Speedtest",
       "rule-set:Spotify-Site": "https://cloudflare-dns.com/dns-query#Spotify",
       "rule-set:Steam-Site": "https://doh.pub/dns-query#Steam",
