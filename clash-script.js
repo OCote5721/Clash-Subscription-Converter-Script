@@ -199,7 +199,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Apple/Apple-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Apple/Apple-IP.mrs",
       path: "./ruleset/Apple-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -208,7 +208,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Apple/Apple-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Apple/Apple-Site.mrs",
       path: "./ruleset/Apple-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -217,7 +217,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Bahamut/Bahamut-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Bahamut/Bahamut-Site.mrs",
       path: "./ruleset/Bahamut-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -226,7 +226,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Bilibili/Bilibili-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Bilibili/Bilibili-IP.mrs",
       path: "./ruleset/Bilibili-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -235,7 +235,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Bilibili/Bilibili-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Bilibili/Bilibili-Site.mrs",
       path: "./ruleset/Bilibili-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -244,7 +244,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/China/China-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/China/China-IP.mrs",
       path: "./ruleset/China-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -253,7 +253,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/China/China-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/China/China-Site.mrs",
       path: "./ruleset/China-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -262,7 +262,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Discord/Discord-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Discord/Discord-Site.mrs",
       path: "./ruleset/Discord-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -280,7 +280,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/GFWList/GFWList-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/GFWList/GFWList-Site.mrs",
       path: "./ruleset/GFWList-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -289,7 +289,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Google/Google-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Google/Google-IP.mrs",
       path: "./ruleset/Google-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -298,7 +298,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Google/Google-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Google/Google-Site.mrs",
       path: "./ruleset/Google-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -307,7 +307,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/GoogleFCM/GoogleFCM-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/GoogleFCM/GoogleFCM-Site.mrs",
       path: "./ruleset/GoogleFCM-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -325,7 +325,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Local/Local-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Local/Local-IP.mrs",
       path: "./ruleset/Local-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -334,7 +334,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Microsoft/Microsoft-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Microsoft/Microsoft-Site.mrs",
       path: "./ruleset/Microsoft-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -343,7 +343,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Netflix/Netflix-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Netflix/Netflix-Site.mrs",
       path: "./ruleset/Netflix-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -352,7 +352,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Netflix/Netflix-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Netflix/Netflix-IP.mrs",
       path: "./ruleset/Netflix-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -361,7 +361,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/OpenAI/OpenAI-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/OpenAI/OpenAI-IP.mrs",
       path: "./ruleset/OpenAI-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -370,7 +370,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/OpenAI/OpenAI-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/OpenAI/OpenAI-Site.mrs",
       path: "./ruleset/OpenAI-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -388,7 +388,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Speedtest/Speedtest-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Speedtest/Speedtest-Site.mrs",
       path: "./ruleset/Speedtest-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -397,7 +397,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Spotify/Spotify-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Spotify/Spotify-IP.mrs",
       path: "./ruleset/Spotify-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -406,7 +406,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Spotify/Spotify-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Spotify/Spotify-Site.mrs",
       path: "./ruleset/Spotify-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -415,7 +415,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Steam/Steam-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Steam/Steam-Site.mrs",
       path: "./ruleset/Steam-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -424,7 +424,7 @@ function main(config) {
       type: "http",
       behavior: "ipcidr",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Telegram/Telegram-IP.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Telegram/Telegram-IP.mrs",
       path: "./ruleset/Telegram-IP.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -433,7 +433,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/Telegram/Telegram-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/Telegram/Telegram-Site.mrs",
       path: "./ruleset/Telegram-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
@@ -442,7 +442,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@stable/mihomo/TikTok/TikTok-Site.mrs",
+      url: "https://cdn.jsdmirror.com/gh/HosheaPDNX/rule-set@V2.0.6/mihomo/TikTok/TikTok-Site.mrs",
       path: "./ruleset/TikTok-Site.mrs",
       proxy: "DIRECT",
       interval: 604800
