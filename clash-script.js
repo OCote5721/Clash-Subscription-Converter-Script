@@ -8,6 +8,9 @@ function main(config) {
   // true 则保留，false 则去除
   const SHOW_DIRECT_IN_MAIN = false;
 
+  // 国家节点组的类型："url-test" (自动选择最低延迟) 或 "select" (手动选择)
+  const COUNTRY_GROUP_TYPE = "url-test";
+
   // 预定义的国家正则匹配和对应的旗帜
   // 你可以在这里继续添加你需要分类的国家或地区，如果没有匹配到相应的节点，则不会生成该分组
   // 提示：去除了 ^ 开头限制，以便更好地匹配已经带有旗帜或其他前缀的节点名称
@@ -131,7 +134,7 @@ function main(config) {
   countryGroupNames.forEach(groupName => {
     countryProxyGroups.push({
       name: groupName,
-      type: "url-test",
+      type: COUNTRY_GROUP_TYPE,
       url: "https://www.gstatic.com/generate_204",
       interval: 600,
       lazy: false,
@@ -145,23 +148,26 @@ function main(config) {
     ...otherProxyNames
   ];
 
+  // 对 config.proxies 应用与主代理相同的排序逻辑，使全局模式也能按国家分组排序
+  const proxyByName = new Map(config.proxies.map(p => [p.name, p]));
+  config.proxies = [...allProxyNames, ...infoNodes]
+    .map(name => proxyByName.get(name))
+    .filter(Boolean);
+
   // 2. 构建新的代理组
   const newProxyGroups = [];
-  
-  // 根据用户配置开关，决定在主代理中是否显示 信息节点 和 DIRECT
-  const mainProxyInject = [];
-  if (SHOW_INFO_NODES_IN_MAIN) {
-    mainProxyInject.push(...infoNodes);
-  }
-  if (SHOW_DIRECT_IN_MAIN) {
-    mainProxyInject.push("DIRECT");
-  }
 
-  // 主代理组
+  // 主代理组：直接使用排序后的 config.proxies
   const mainProxyGroup = {
     name: "主代理",
     type: "select",
-    proxies: [...countryGroupNames, ...mainProxyInject, ...allProxyNames]
+    proxies: [
+      ...countryGroupNames,
+      ...(SHOW_DIRECT_IN_MAIN ? ["DIRECT"] : []),
+      ...config.proxies
+        .filter(p => SHOW_INFO_NODES_IN_MAIN || !infoNodes.includes(p.name))
+        .map(p => p.name)
+    ]
   };
   newProxyGroups.push(mainProxyGroup);
 
