@@ -163,9 +163,10 @@ function main(config) {
     type: "select",
     proxies: [
       ...countryGroupNames,
+      ...(SHOW_INFO_NODES_IN_MAIN ? infoNodes : []),
       ...(SHOW_DIRECT_IN_MAIN ? ["DIRECT"] : []),
       ...config.proxies
-        .filter(p => SHOW_INFO_NODES_IN_MAIN || !infoNodes.includes(p.name))
+        .filter(p => !infoNodes.includes(p.name))
         .map(p => p.name)
     ]
   };
