@@ -253,23 +253,22 @@ function main(config) {
     ...otherProxyNames
   ];
 
-  // 对 config.proxies 应用与主代理相同的排序逻辑，使全局模式也能按国家分组排序
-  const proxyRank = new Map([...allProxyNames, ...infoNodes].map((name, index) => [name, index]));
+  // 对 config.proxies 应用与主代理相同的排序逻辑，使全局模式也能按国家分组排序（信息节点排在开头）
+  const proxyRank = new Map([...infoNodes, ...allProxyNames].map((name, index) => [name, index]));
   const sortedProxies = proxies.slice().sort((a, b) => proxyRank.get(a.name) - proxyRank.get(b.name));
 
   // 2. 构建新的代理组
   const newProxyGroups = [];
 
-  // 主代理组：直接使用排序后的 config.proxies
+  // 主代理组：保留国家组与 DIRECT 后，直接复制排序后的 proxies 节点列表
   const mainProxyGroup = {
     name: "主代理",
     type: "select",
     proxies: [
       ...countryGroupNames,
-      ...(SHOW_INFO_NODES_IN_MAIN ? infoNodes : []),
       ...(SHOW_DIRECT_IN_MAIN ? ["DIRECT"] : []),
       ...sortedProxies
-        .filter(p => !infoNodes.includes(p.name))
+        .filter(p => SHOW_INFO_NODES_IN_MAIN || !infoNodes.includes(p.name))
         .map(p => p.name)
     ]
   };
@@ -586,7 +585,12 @@ function main(config) {
 
   // 被关闭分流组所对应的规则自动回退到“主代理”，避免引用不存在的策略组
   const rules = [
+    "RULE-SET,Local-IP,DIRECT,no-resolve",
     // "AND,((DST-PORT,443),(NETWORK,UDP)),REJECT",
+    // "PROCESS-NAME,Blip.exe,DIRECT",
+    // "PROCESS-NAME,Blip,DIRECT",
+    // "PROCESS-NAME,net.blip.android,DIRECT",
+    // "DOMAIN-SUFFIX,blip.net,DIRECT",
     "DOMAIN,ntp.aliyun.com,DIRECT",
     "DOMAIN-KEYWORD,msftconnecttest.com,主代理",
     "DOMAIN-KEYWORD,msftncsi.com,主代理",
@@ -612,7 +616,6 @@ function main(config) {
     "RULE-SET,Microsoft-Site,Microsoft",
     "RULE-SET,GFWList-Site,GFWList",
     "RULE-SET,China-Site,China",
-    "RULE-SET,Local-IP,DIRECT,no-resolve",
     "RULE-SET,Bilibili-IP,Bilibili",
     "RULE-SET,Netflix-IP,Netflix",
     "RULE-SET,OpenAI-IP,OpenAI",
