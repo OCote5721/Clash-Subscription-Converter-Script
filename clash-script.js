@@ -641,13 +641,13 @@ function main(config) {
   });
   
   // 5. 注入全局配置并重置策略组与规则
-  config["port"] = 7890;
-  config["socks-port"] = 7891;
-  config["mixed-port"] = 7892;
+  // config["port"] = 7890;
+  // config["socks-port"] = 7891;
+  // config["mixed-port"] = 7892;
   config["allow-lan"] = false;
   config["bind-address"] = "*";
   config["mode"] = "rule";
-  config["log-level"] = "info";
+  // config["log-level"] = "info";
   config["ipv6"] = false;
   config["find-process-mode"] = "strict";
   config["external-controller"] = "127.0.0.1:9090";
@@ -689,20 +689,20 @@ function main(config) {
     "interval": 30
   };
 
-  config["tun"] = {
-    "enable": true,
-    "stack": "system",
-    "auto-route": true,
-    "auto-detect-interface": true,
-    "strict-route": true,
-    "dns-hijack": [
-      "any:53",
-      "tcp://any:53"
-    ],
-    "device": "SakuraiTunnel",
-    "mtu": 9000,
-    "endpoint-independent-nat": true
-  };
+  // config["tun"] = {
+  //   "enable": true,
+  //   "stack": "system",
+  //   "auto-route": true,
+  //   "auto-detect-interface": true,
+  //   "strict-route": true,
+  //   "dns-hijack": [
+  //     "any:53",
+  //     "tcp://any:53"
+  //   ],
+  //   "device": "SakuraiTunnel",
+  //   "mtu": 9000,
+  //   "endpoint-independent-nat": true
+  // };
 
   config["dns"] = {
     "enable": true,
