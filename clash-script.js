@@ -18,26 +18,28 @@ function main(config) {
 
   // 预定义的国家正则匹配和对应的旗帜
   // 你可以在这里继续添加你需要分类的国家或地区，如果没有匹配到相应的节点，则不会生成该分组
-  // 提示：去除了 ^ 开头限制，以便更好地匹配已经带有旗帜或其他前缀的节点名称
+  // 英文名称和缩写忽略大小写，并限制字母边界，兼容 HK01、VIP_HK_01 等名称
+  const countryRegex = (local, english) =>
+    new RegExp(`${local.source}|(?:^|[^a-z])(?:${english.source})(?=$|[^a-z])`, "i");
   const countryMapping = [
-    { regex: /(🇭🇰|HK|Hong.*Kong|香港)/, flag: "🇭🇰", name: "HK" },
-    { regex: /(🇯🇵|JP|Japan|日本|东京|大阪)/, flag: "🇯🇵", name: "JP" },
-    { regex: /(🇰🇷|KR|Korea|韩国|首尔)/, flag: "🇰🇷", name: "KR" },
-    { regex: /(🇸🇬|SG|Singapore|新加坡|狮城)/, flag: "🇸🇬", name: "SG" },
-    { regex: /(🇹🇼|TW|Taiwan|台湾|新北|彰化|台北)/, flag: "🇹🇼", name: "TW" },
-    { regex: /(🇺🇸|US|America|United.*States|美国|洛杉矶|硅谷|西雅图|凤凰城|圣何塞)/, flag: "🇺🇸", name: "US" },
-    { regex: /(🇬🇧|UK|Britain|United.*Kingdom|英国|伦敦)/, flag: "🇬🇧", name: "UK" },
-    { regex: /(🇩🇪|DE|Germany|德国|法兰克福)/, flag: "🇩🇪", name: "DE" },
-    { regex: /(🇫🇷|FR|France|法国|巴黎)/, flag: "🇫🇷", name: "FR" },
-    { regex: /(🇨🇦|CA|Canada|加拿大)/, flag: "🇨🇦", name: "CA" },
-    { regex: /(🇦🇺|AU|Australia|澳大利亚|悉尼)/, flag: "🇦🇺", name: "AU" },
-    // { regex: /(🇲🇾|MY|Malaysia|马来西亚)/, flag: "🇲🇾", name: "MY" },
-    // { regex: /(🇷🇺|RU|Russia|俄罗斯|莫斯科)/, flag: "🇷🇺", name: "RU" },
-    // { regex: /(🇦🇪|AE|Dubai|迪拜)/, flag: "🇦🇪", name: "AE" },
-    // { regex: /(🇧🇷|BR|Brazil|巴西|圣保罗)/, flag: "🇧🇷", name: "BR" },
-    // { regex: /(🇮🇳|IN|India|印度|孟买|海得拉巴)/, flag: "🇮🇳", name: "IN" },
-    // { regex: /(🇲🇽|MX|Mexico|墨西哥|克雷塔罗)/, flag: "🇲🇽", name: "MX" },
-    // { regex: /(🇪🇸|ES|Spain|西班牙|马德里)/, flag: "🇪🇸", name: "ES" },
+    { regex: countryRegex(/🇭🇰|香港/, /HK|Hong[\s_-]*Kong/), flag: "🇭🇰", name: "HK" },
+    { regex: countryRegex(/🇯🇵|日本|东京|東京|大阪/, /JP|Japan/), flag: "🇯🇵", name: "JP" },
+    { regex: countryRegex(/🇰🇷|韩国|韓國|首尔|首爾/, /KR|Korea|South[\s_-]*Korea/), flag: "🇰🇷", name: "KR" },
+    { regex: countryRegex(/🇸🇬|新加坡|狮城|獅城/, /SG|Singapore/), flag: "🇸🇬", name: "SG" },
+    { regex: countryRegex(/🇹🇼|台湾|台灣|臺灣|新北|彰化|台北|臺北/, /TW|Taiwan/), flag: "🇹🇼", name: "TW" },
+    { regex: countryRegex(/🇺🇸|美国|美國|洛杉矶|洛杉磯|硅谷|西雅图|西雅圖|凤凰城|鳳凰城|圣何塞|聖何塞/, /US|USA|America|United[\s_-]*States/), flag: "🇺🇸", name: "US" },
+    { regex: countryRegex(/🇬🇧|英国|英國|伦敦|倫敦/, /UK|Britain|United[\s_-]*Kingdom/), flag: "🇬🇧", name: "UK" },
+    { regex: countryRegex(/🇩🇪|德国|德國|法兰克福|法蘭克福/, /DE|Germany/), flag: "🇩🇪", name: "DE" },
+    { regex: countryRegex(/🇫🇷|法国|法國|巴黎/, /FR|France/), flag: "🇫🇷", name: "FR" },
+    { regex: countryRegex(/🇨🇦|加拿大/, /CA|Canada/), flag: "🇨🇦", name: "CA" },
+    { regex: countryRegex(/🇦🇺|澳大利亚|澳大利亞|悉尼/, /AU|Australia/), flag: "🇦🇺", name: "AU" },
+    // { regex: countryRegex(/🇲🇾|马来西亚|馬來西亞/, /MY|Malaysia/), flag: "🇲🇾", name: "MY" },
+    // { regex: countryRegex(/🇷🇺|俄罗斯|俄羅斯|莫斯科/, /RU|Russia/), flag: "🇷🇺", name: "RU" },
+    // { regex: countryRegex(/🇦🇪|迪拜/, /AE|Dubai/), flag: "🇦🇪", name: "AE" },
+    // { regex: countryRegex(/🇧🇷|巴西|圣保罗|聖保羅/, /BR|Brazil/), flag: "🇧🇷", name: "BR" },
+    // { regex: countryRegex(/🇮🇳|印度|孟买|孟買|海得拉巴/, /IN|India/), flag: "🇮🇳", name: "IN" },
+    // { regex: countryRegex(/🇲🇽|墨西哥|克雷塔罗|克雷塔羅/, /MX|Mexico/), flag: "🇲🇽", name: "MX" },
+    // { regex: countryRegex(/🇪🇸|西班牙|马德里|馬德里/, /ES|Spain/), flag: "🇪🇸", name: "ES" },
   ];
   
 
