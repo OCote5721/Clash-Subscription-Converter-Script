@@ -91,7 +91,7 @@ const sortOrder = ["HK", "JP", "KR", "SG", "TW", "US", "MY"];
 
 订阅 hosts 默认仅用于改写节点地址，并尽量保留原 TLS 名称和 WebSocket Host。不要依赖它继续为普通网站提供 hosts 映射。
 
-节点解析优先使用订阅明确配置的 `dns.proxy-server-nameserver-policy`，其余节点使用订阅的 `dns.proxy-server-nameserver`；未提供或列表为空时，使用脚本默认的节点 DNS。不会从通用 `nameserver` 推断节点 DNS，也不会继承普通网站的 DNS 策略。继承的节点 DNS 中，节点引用随重命名更新，已被覆写删除的旧策略组引用回退到 `DIRECT`。
+DNS 由脚本统一生成，不继承订阅的 DNS 设置。节点域名使用 AliDNS、DNSPod 和 OneDNS 的直连 DoH 解析，网站域名按脚本中的应用 DNS 策略处理；DNS 监听地址固定为 `0.0.0.0:1053`。需要自定义时，修改脚本内对应配置后重新应用。
 
 节点名称会自动去重，链式代理的节点引用会随重命名更新。订阅中有重复原始名称、引用失效、循环依赖，或仅有提示节点而没有普通节点时，脚本会报错，需要先修正订阅或相关设置。
 

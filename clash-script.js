@@ -725,20 +725,6 @@ function main(config) {
   //   "endpoint-independent-nat": true
   // };
 
-  // 仅继承订阅明确提供的节点 DNS，不从通用 nameserver 中推断。
-  const originalDns = config.dns || {};
-  const originalDnsTargets = new Set([
-    ...config.proxies.map(proxy => proxy.name),
-    ...(config["proxy-groups"] || []).map(group => group.name)
-  ]);
-  const updateNodeDns = server => server.replace(/#([^&]+)/, (match, target) => {
-    const updatedTarget = renamedNames.get(target) || target;
-    if (validTargets.has(updatedTarget)) return `#${updatedTarget}`;
-    // 旧策略组已被覆盖时，节点解析回退直连；接口名和其他 DNS 参数保持原样。
-    return originalDnsTargets.has(target) ? "#DIRECT" : match;
-  });
-  const nodeNameservers = originalDns["proxy-server-nameserver"];
-
   config["dns"] = {
     "enable": true,
     "prefer-h3": false,
@@ -772,7 +758,7 @@ function main(config) {
       "180.76.76.76#DIRECT",
       "180.184.1.1#DIRECT"
     ],
-    "proxy-server-nameserver": nodeNameservers?.length ? nodeNameservers.map(updateNodeDns) : [
+    "proxy-server-nameserver": [
       "https://dns.alidns.com/dns-query#DIRECT",
       "https://doh.pub/dns-query#DIRECT",
       "https://doh.onedns.net/dns-query#DIRECT"
@@ -811,13 +797,6 @@ function main(config) {
       "rule-set:China-Site": "https://dns.alidns.com/dns-query#China"
     }
   };
-
-  const nodeDnsPolicy = Object.entries(originalDns["proxy-server-nameserver-policy"] || {});
-  if (nodeDnsPolicy.length) {
-    config.dns["proxy-server-nameserver-policy"] = Object.fromEntries(nodeDnsPolicy.map(([domain, servers]) => [
-      domain, Array.isArray(servers) ? servers.map(updateNodeDns) : updateNodeDns(servers)
-    ]));
-  }
 
   // 被关闭分流组所对应的 DNS 策略同样回退到“主代理”
   Object.keys(config["dns"]["nameserver-policy"]).forEach(policy => {
