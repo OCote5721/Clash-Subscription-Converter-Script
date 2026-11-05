@@ -6,3 +6,11 @@
 !clash-script.js
 !proxy-providers.yaml
 !example.yaml
+!/mrs-convert.js
+!/apply-main.js
+!/test-routes.js
+!/package.json
+!/package-lock.json
+node_modules/
+/test/
+/temp/

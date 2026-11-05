@@ -1,0 +1,7 @@
+{
+  "name": "sub-conversion-tools",
+  "private": true,
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}
