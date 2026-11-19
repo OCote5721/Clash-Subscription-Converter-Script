@@ -52,7 +52,7 @@ function main(config) {
   // 定义分流组的显示顺序，同时作为允许生成分流组的白名单
   // 调整数组中的顺序即可排序；删除或注释某项即可关闭对应分流组
   const appGroupOrder = [
-    "OpenAI", "Claude", "Gemini", "Google", "Microsoft", "PayPal", "AI",  "Steam", "SteamDownload", "Twitter", "Youtube", "Netflix", "Disney", "Hbomax","Apple", "Spotify", "Telegram", "Discord", "TikTok", "GoogleFCM", "Speedtest", "Bilibili", "Bahamut", "China", "GFWList", "Final"
+    "OpenAI", "Claude", "Gemini", "Google", "Microsoft", "PayPal", "Steam", "SteamDownload", "Twitter", "Youtube", "Netflix", "Disney", "Hbomax","Apple", "Spotify", "Telegram", "Discord", "TikTok", "GoogleFCM", "Speedtest", "Bilibili", "Bahamut", "China", "GFWList", "Final"
   ];
 
   // =================================================
@@ -332,14 +332,6 @@ function main(config) {
 
   // 3. 远程规则按名称的字母顺序排列；匹配优先级由下方 rules 决定。
   const ruleProviders = {
-    "AI-Site": {
-      type: "http",
-      behavior: "domain",
-      format: "mrs",
-      url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-!cn.mrs",
-      path: "./ruleset/AI-Site.mrs",
-      interval: 86400
-    },
     "Apple-IP": {
       type: "http",
       behavior: "ipcidr",
@@ -520,7 +512,7 @@ function main(config) {
       type: "http",
       behavior: "domain",
       format: "mrs",
-      url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-speedtest.mrs",
+      url: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/speedtest.mrs",
       path: "./ruleset/Speedtest-Site.mrs",
       interval: 86400
     },
@@ -606,46 +598,41 @@ function main(config) {
   // 被关闭分流组所对应的规则自动回退到“主代理”，避免引用不存在的策略组
   const rules = [
     "RULE-SET,Local-IP,DIRECT,no-resolve",
-    // "AND,((DST-PORT,443),(NETWORK,UDP)),REJECT",
-    // "PROCESS-NAME,Blip.exe,DIRECT",
-    // "PROCESS-NAME,Blip,DIRECT",
-    // "PROCESS-NAME,net.blip.android,DIRECT",
-    // "DOMAIN-SUFFIX,blip.net,DIRECT",
+    "AND,((DST-PORT,443),(NETWORK,UDP)),REJECT",
     "DOMAIN,ntp.aliyun.com,DIRECT",
     "DOMAIN-KEYWORD,msftconnecttest.com,主代理",
     "DOMAIN-KEYWORD,msftncsi.com,主代理",
     "RULE-SET,OpenAI-Site,OpenAI",
-    "RULE-SET,Claude-Site,Claude",
     "RULE-SET,Gemini-Site,Gemini",
-    "RULE-SET,AI-Site,AI",
+    "RULE-SET,Claude-Site,Claude",
     "RULE-SET,GoogleFCM-Site,GoogleFCM",
-    "RULE-SET,PayPal-Site,PayPal",
     "RULE-SET,Bilibili-Site,Bilibili",
-    "RULE-SET,China-Site,China",
+    "RULE-SET,PayPal-Site,PayPal",
+    "RULE-SET,Youtube-Site,Youtube",
+    "RULE-SET,Google-Site,Google",
     "RULE-SET,Bahamut-Site,Bahamut",
     "RULE-SET,Discord-Site,Discord",
     "RULE-SET,Netflix-Site,Netflix",
-    "RULE-SET,Speedtest-Site,Speedtest",
     "RULE-SET,Spotify-Site,Spotify",
     "RULE-SET,SteamDownload-Site,SteamDownload",
     "RULE-SET,Steam-Site,Steam",
+    "RULE-SET,Microsoft-Site,Microsoft",
+    "RULE-SET,Speedtest-Site,Speedtest",
     "RULE-SET,Telegram-Site,Telegram",
     "RULE-SET,TikTok-Site,TikTok",
     "RULE-SET,Twitter-Site,Twitter",
-    "RULE-SET,Youtube-Site,Youtube",
     "RULE-SET,Disney-Site,Disney",
     "RULE-SET,Hbomax-Site,Hbomax",
     "RULE-SET,Apple-Site,Apple",
-    "RULE-SET,Google-Site,Google",
-    "RULE-SET,Microsoft-Site,Microsoft",
     "RULE-SET,GFWList-Site,GFWList",
+    "RULE-SET,China-Site,China",
     "RULE-SET,Google-IP,Google",
     "RULE-SET,Bilibili-IP,Bilibili",
-    "RULE-SET,China-IP,China",
     "RULE-SET,Netflix-IP,Netflix",
     "RULE-SET,Telegram-IP,Telegram",
     "RULE-SET,Twitter-IP,Twitter",
     "RULE-SET,Apple-IP,Apple",
+    "RULE-SET,China-IP,China",
     "MATCH,Final"
   ].map(rule => {
     const parts = rule.split(",");
@@ -769,11 +756,9 @@ function main(config) {
     "nameserver-policy": {
       "ntp.aliyun.com": "https://dns.alidns.com/dns-query#DIRECT",
       "+.msftconnecttest.com,+.msftncsi.com": "https://cloudflare-dns.com/dns-query#主代理",
-      // 与路由相同，先匹配专属 AI，再匹配通用 AI 和其他应用。
       "rule-set:OpenAI-Site": "https://cloudflare-dns.com/dns-query#OpenAI",
       "rule-set:Claude-Site": "https://cloudflare-dns.com/dns-query#Claude",
       "rule-set:Gemini-Site": "https://cloudflare-dns.com/dns-query#Gemini",
-      "rule-set:AI-Site": "https://cloudflare-dns.com/dns-query#AI",
       "rule-set:Bahamut-Site": "https://cloudflare-dns.com/dns-query#Bahamut",
       "rule-set:Bilibili-Site": "https://dns.alidns.com/dns-query#Bilibili",
       "rule-set:Discord-Site": "https://cloudflare-dns.com/dns-query#Discord",
